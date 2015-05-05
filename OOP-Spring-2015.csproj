@@ -35,9 +35,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuyTransaction.cs" />
+    <Compile Include="InsertCashTransaction.cs" />
+    <Compile Include="InsufficientCreditsException.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SeasonalProduct.cs" />
+    <Compile Include="StringSystem.cs" />
+    <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
