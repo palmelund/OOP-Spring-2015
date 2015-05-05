@@ -30,9 +30,9 @@ namespace OOP_Spring_2015
             return "Purchase:: ID: " + TransactionID + " user: " + user + " amount: " + Amount + " date: " + date;
         }
 
-        public override void Execute()
-        {
-            throw new NotImplementedException();
-        }
+        //public override void Execute()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

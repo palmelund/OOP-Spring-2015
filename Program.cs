@@ -10,7 +10,10 @@ namespace OOP_Spring_2015
     {
         public static void Main()
         {
-
+            IStringSystem stringSystem = new IStringSystem();
+            StringSystemCLI cli = new StringSystemCLI(stringSystem);
+            StringSystemCommandParser parser = new StringSystemCommandParser(cli, stringSystem);
+            cli.Start(parser);
         }
     }
 }

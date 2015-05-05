@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
-    class Transaction
+    public class Transaction
     {
         public uint TransactionID
         {
@@ -42,9 +42,6 @@ namespace OOP_Spring_2015
             return "ID: " + TransactionID + " Amount: " + Amount + " Date: " + date;
         }
 
-        public abstract void Execute()
-        {
-
-        }
+        //public abstract void Execute(); // Abstract?
     }
 }

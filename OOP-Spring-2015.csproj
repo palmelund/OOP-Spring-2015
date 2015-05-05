@@ -38,10 +38,14 @@
     <Compile Include="BuyTransaction.cs" />
     <Compile Include="InsertCashTransaction.cs" />
     <Compile Include="InsufficientCreditsException.cs" />
+    <Compile Include="IStringSystem.cs" />
+    <Compile Include="IStringSystemUI.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SeasonalProduct.cs" />
     <Compile Include="StringSystem.cs" />
+    <Compile Include="StringSystemCLI.cs" />
+    <Compile Include="StringSystemCommandParser.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
-    class StringSystem
+    public class StringSystem
     {
         public StringSystem()
         {
