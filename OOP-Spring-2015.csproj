@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SeasonalProduct.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
