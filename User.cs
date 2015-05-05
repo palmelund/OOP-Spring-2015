@@ -162,9 +162,19 @@ namespace OOP_Spring_2015
             return this.UserID.GetHashCode();
         }
 
-        public int CompareTo(User user)
+        public int CompareTo(object obj)
         {
-            return (int)(UserID - user.UserID);
+            if (obj == null) return 1;
+
+            User user = obj as User;
+            if (user != null)
+            {
+                return (int)(UserID - user.UserID);
+            }
+            else
+            {
+                throw new ArgumentException("Object is not a user");
+            }
         }
     }
 
