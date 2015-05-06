@@ -47,6 +47,7 @@
     <Compile Include="IStringSystemUI.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Exceptions\ProductDoesNotExistException.cs" />
+    <Compile Include="ProductsReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SeasonalProduct.cs" />
     <Compile Include="StringSystem.cs" />

@@ -46,16 +46,17 @@ namespace OOP_Spring_2015
 
         public Product GetProduct(uint id)
         {
-            foreach (var item in products)
-            {
-                if(item.Key == id)
-                {
-                    return item.Value;
-                }
-            }
-            throw new ProductDoesNotExistException("Product does not exist");
-        }
+            bool contains = products.ContainsKey(id);
 
+            if (contains == true)
+            {
+                return products[id];
+            }
+            else
+            {
+                throw new ProductDoesNotExistException("Product does not exist");
+            }
+        }
         public User GetUser(string username)
         {
             foreach (var item in users)
