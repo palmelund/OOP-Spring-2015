@@ -76,11 +76,11 @@ namespace OOP_Spring_2015
 
             if (string.IsNullOrEmpty(username))
             {
-                throw new NotImplementedException(); // Tell user to input a username
+                throw new ArgumentNullException("No username"); // Tell user to input a username
             }
             else if (!regex.IsMatch(username))
             {
-                throw new NotImplementedException(); // Tell user of incorrect symbols
+                throw new ArgumentException("Invalid Characters"); // Tell user of incorrect symbols
             }
             else
             {
@@ -103,7 +103,7 @@ namespace OOP_Spring_2015
                     || emailcomp[1].EndsWith("-")
                     || !emailcomp[1].Contains("."))
                 {
-                    throw new NotImplementedException(); // Tell user EMail is invalid
+                    throw new ArgumentException("Invalid EMail"); // Tell user EMail is invalid
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace OOP_Spring_2015
             }
             else
             {
-                throw new NotImplementedException(); // Tell user Email is invalid
+                throw new ArgumentException("Invalid EMail"); // Tell user Email is invalid
             }
         }
 

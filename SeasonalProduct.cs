@@ -20,13 +20,13 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public SeasonalProduct(uint productID, string name, uint price, bool active, bool credit, DateTime seasonStartDate, DateTime seasonEndDate)
+        public SeasonalProduct(uint productID, string name, uint price, bool active/*, bool credit*/, DateTime seasonStartDate, DateTime seasonEndDate)
         {
             ProductID = productID;
             Name = name;
             Price = price;
             Active = active;
-            CanBeBoughtOnCredit = credit;
+            //CanBeBoughtOnCredit = credit;
             SeasonStartDate = seasonStartDate;
             SeasonEndDate = seasonEndDate;
         }

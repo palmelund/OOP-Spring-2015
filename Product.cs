@@ -39,13 +39,13 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public Product(uint productID, string name, uint price, bool active, bool credit)
+        public Product(uint productID, string name, uint price, bool active/*, bool credit*/)
         {
             ProductID = SetProductID(productID);
             Name = SetProductName(name);
             Price = price;
             Active = active;
-            CanBeBoughtOnCredit = credit;
+            CanBeBoughtOnCredit = false;
         }
 
         protected Product()
@@ -77,19 +77,22 @@ namespace OOP_Spring_2015
             }
         }
 
-        public void SetNewPrice(uint price)
+        public uint SetNewPrice(uint price)
         {
             Price = price;
+            return Price;
         }
 
-        public void SetActive(bool active)
+        public bool SetActive(bool active)
         {
             Active = active;
+            return Active;
         }
 
-        public void SetCanBeBoughtOnCredit(bool credit)
+        public bool SetCanBeBoughtOnCredit(bool credit)
         {
             CanBeBoughtOnCredit = credit;
+            return CanBeBoughtOnCredit;
         }
     }
 }

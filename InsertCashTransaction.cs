@@ -13,10 +13,10 @@ namespace OOP_Spring_2015
 
         }
 
-        //public override void Execute()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public override void Execute()
+        {
+            base.Execute();
+        }
 
         public override string ToString()
         {

@@ -32,9 +32,29 @@ namespace OOP_Spring_2015
             protected set;
         }
 
+        public Transaction(uint id, User user, DateTime date, uint amount)
+        {
+            TransactionID = id;
+            this.user = SetUser(user);
+            this.date = date;
+            Amount = amount;
+        }
+
         public Transaction()
         {
 
+        }
+
+        protected User SetUser(User user)
+        {
+            if(user == null)
+            {
+                throw new ArgumentNullException("User not found");
+            }
+            else
+            {
+                return user;
+            }
         }
 
         public override string ToString()
@@ -42,6 +62,9 @@ namespace OOP_Spring_2015
             return "ID: " + TransactionID + " Amount: " + Amount + " Date: " + date;
         }
 
-        //public abstract void Execute(); // Abstract?
+        public virtual void Execute()
+        {
+
+        }
     }
 }

@@ -20,19 +20,27 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public BuyTransaction()
+        public BuyTransaction(uint id, User user, DateTime date,Product product, uint amount)
         {
+            TransactionID = id;
+            this.user = SetUser(user);
+            this.date = date;
+            this.product = product;
+            this.Amount = amount;
+        }
 
+        public override void Execute()
+        {
+            if(user.Balance < (int) Amount && product.CanBeBoughtOnCredit == false)
+            {
+                throw new InsufficientCreditsException("Insufficient funds");
+            }
+            user.SubtractSaldo((int) Amount);
         }
 
         public override string ToString()
         {
             return "Purchase:: ID: " + TransactionID + " user: " + user + " amount: " + Amount + " date: " + date;
         }
-
-        //public override void Execute()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
