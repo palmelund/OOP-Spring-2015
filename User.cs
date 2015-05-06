@@ -120,21 +120,19 @@ namespace OOP_Spring_2015
 
         #region Balance
 
-        public int Salso()
+        public int Saldo()
         {
             return Balance;
         }
 
-        public int AddSaldo(int saldo)
+        public void AddToBalance(int amount)
         {
-            Balance += saldo;
-            return Balance;
+            Balance += Math.Abs(amount);
         }
 
-        public int SubtractSaldo(int saldo)
+        public void SubtractFromBalance(int amount)
         {
-            Balance -= saldo;
-            return Balance;
+            Balance -= Math.Abs(amount);
         }
 
         #endregion

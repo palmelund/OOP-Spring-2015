@@ -14,28 +14,28 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        new public uint Amount
+        new public int Amount
         {
             get;
             protected set;
         }
 
-        public BuyTransaction(uint id, User user, DateTime date,Product product, uint amount)
+        public BuyTransaction(uint id, User user, DateTime date,Product product, int amount)
         {
             TransactionID = id;
             this.user = SetUser(user);
-            this.date = date;
+            this.date = SetDate(date);
             this.product = product;
             this.Amount = amount;
         }
 
         public override void Execute()
         {
-            if(user.Balance < (int) Amount && product.CanBeBoughtOnCredit == false)
+            if(user.Balance < Amount && product.CanBeBoughtOnCredit == false)
             {
                 throw new InsufficientCreditsException("Insufficient funds");
             }
-            user.SubtractSaldo((int) Amount);
+            user.SubtractFromBalance(Amount);
         }
 
         public override string ToString()

@@ -36,7 +36,7 @@ namespace OOP_Spring_2015
         {
             TransactionID = id;
             this.user = SetUser(user);
-            this.date = date;
+            this.date = SetDate(date);
             Amount = amount;
         }
 
@@ -54,6 +54,18 @@ namespace OOP_Spring_2015
             else
             {
                 return user;
+            }
+        }
+
+        protected DateTime SetDate(DateTime date)
+        {
+            if (date == null)
+            {
+                throw new ArgumentNullException("Date not found");
+            }
+            else
+            {
+                return date;
             }
         }
 
