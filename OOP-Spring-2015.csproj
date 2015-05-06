@@ -37,11 +37,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuyTransaction.cs" />
+    <Compile Include="Exceptions\ProductNotActiveException.cs" />
+    <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="InsertCashTransaction.cs" />
-    <Compile Include="InsufficientCreditsException.cs" />
+    <Compile Include="Exceptions\InsufficientCreditsException.cs" />
     <Compile Include="IStringSystem.cs" />
     <Compile Include="IStringSystemUI.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="Exceptions\ProductDoesNotExistException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SeasonalProduct.cs" />
     <Compile Include="StringSystem.cs" />

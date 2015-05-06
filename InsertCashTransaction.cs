@@ -8,14 +8,17 @@ namespace OOP_Spring_2015
 {
     public class InsertCashTransaction : Transaction
     {
-        public InsertCashTransaction()
+        public InsertCashTransaction(uint id, User user, DateTime date, uint amount)
         {
-
+            TransactionID = id;
+            this.user = SetUser(user);
+            this.date = SetDate(date);
+            this.Amount = amount;
         }
 
-        public override void Execute()
+        public void Execute(int amount)
         {
-            base.Execute();
+            user.AddToBalance(amount);
         }
 
         public override string ToString()

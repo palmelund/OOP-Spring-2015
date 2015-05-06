@@ -14,19 +14,19 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        new public int Amount
+        new public uint Amount
         {
             get;
             protected set;
         }
 
-        public BuyTransaction(uint id, User user, DateTime date,Product product, int amount)
+        public BuyTransaction(uint id, User user, DateTime date,Product product)
         {
             TransactionID = id;
             this.user = SetUser(user);
             this.date = SetDate(date);
             this.product = product;
-            this.Amount = amount;
+            Amount = product.Price;
         }
 
         public override void Execute()
@@ -35,7 +35,10 @@ namespace OOP_Spring_2015
             {
                 throw new InsufficientCreditsException("Insufficient funds");
             }
-            user.SubtractFromBalance(Amount);
+            else
+            {
+                user.SubtractFromBalance((int)Amount);
+            }
         }
 
         public override string ToString()

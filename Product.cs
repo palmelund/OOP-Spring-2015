@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
-    class Product
+    public class Product
     {
 
         public uint ProductID
