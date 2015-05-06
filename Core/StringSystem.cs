@@ -9,13 +9,14 @@ namespace OOP_Spring_2015
 {
     public class StringSystem
     {
-        Dictionary<uint, Transaction> transactions = new Dictionary<uint, Transaction>();
-        Dictionary<uint, Product> products = new Dictionary<uint, Product>();
-        Dictionary<uint, User> users = new Dictionary<uint, User>();
+        public Dictionary<uint, Transaction> transactions = new Dictionary<uint, Transaction>();
+        public Dictionary<uint, Product> products = new Dictionary<uint, Product>();
+        public Dictionary<uint, User> users = new Dictionary<uint, User>();
 
         public StringSystem()
         {
-
+            ProductsReader productsReader = new ProductsReader();
+            products = productsReader.GetProductDictionary();
         }
 
         public void BuyProduct(User user, Product product)

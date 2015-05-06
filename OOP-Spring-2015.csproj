@@ -38,20 +38,21 @@
     <None Include="Ressources\products.csv" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuyTransaction.cs" />
+    <Compile Include="Core\BuyTransaction.cs" />
     <Compile Include="Exceptions\ProductNotActiveException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
-    <Compile Include="InsertCashTransaction.cs" />
+    <Compile Include="Core\InsertCashTransaction.cs" />
     <Compile Include="Exceptions\InsufficientCreditsException.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="Core\Product.cs" />
     <Compile Include="Exceptions\ProductDoesNotExistException.cs" />
-    <Compile Include="ProductsReader.cs" />
+    <Compile Include="Core\ProductsReader.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="SeasonalProduct.cs" />
-    <Compile Include="StringSystem.cs" />
+    <Compile Include="Core\SeasonalProduct.cs" />
+    <Compile Include="Core\StringSystem.cs" />
+    <Compile Include="UserInterface\StringSystemCLI.cs" />
     <Compile Include="Test\Test.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Core\Transaction.cs" />
+    <Compile Include="Core\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
