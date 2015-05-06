@@ -94,5 +94,10 @@ namespace OOP_Spring_2015
             CanBeBoughtOnCredit = credit;
             return CanBeBoughtOnCredit;
         }
+
+        public override string ToString()
+        {
+            return "ID: " + ProductID + " Name: " + Name + " Price: " + Price + " Active: " + Active;
+        }
     }
 }

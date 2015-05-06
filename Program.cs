@@ -10,10 +10,18 @@ namespace OOP_Spring_2015
     {
         public static void Main()
         {
-            IStringSystem stringSystem = new IStringSystem();
-            StringSystemCLI cli = new StringSystemCLI(stringSystem);
-            StringSystemCommandParser parser = new StringSystemCommandParser(cli, stringSystem);
-            cli.Start(parser);
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            Dictionary<uint, Product> products = new Dictionary<uint, Product>();
+            ProductsReader productsReader = new ProductsReader();
+            products = productsReader.GetProductDictionary();
+
+            foreach (var item in products)
+            {
+                Console.WriteLine("Key: " + item.Key + " Value: " + item.Value);
+            }
+
+            Console.ReadKey();
         }
     }
 }
