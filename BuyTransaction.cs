@@ -14,7 +14,7 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public uint Amount
+        new public uint Amount
         {
             get;
             protected set;
