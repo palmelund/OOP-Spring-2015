@@ -1,0 +1,1 @@
+﻿http://stackoverflow.com/questions/12350801/check-string-for-invalid-characters-smartest-way
