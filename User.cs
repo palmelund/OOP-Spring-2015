@@ -39,7 +39,7 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public uint Balance
+        public int Balance
         {
             get;
             protected set;
@@ -61,7 +61,7 @@ namespace OOP_Spring_2015
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new NotImplementedException(); // Tell user that name is empty
+                throw new ArgumentNullException("Empty name"); // Tell user that name is empty
             }
             else
             {
@@ -91,8 +91,8 @@ namespace OOP_Spring_2015
         string SetEmail(string EMail)
         {
             string[] emailcomp = EMail.Split('@');
-            Regex localRegex = new Regex("^[A-Za-z0-9/.-_]+$");
-            Regex domainRegex = new Regex("^[A-Za-z0-9/.-]+$");
+            Regex localRegex = new Regex("^[A-Za-z0-9\\.-_]+$");
+            Regex domainRegex = new Regex("^[A-Za-z0-9\\.-]+$");
             if (emailcomp.Length == 2 && !string.IsNullOrEmpty(emailcomp[0]) && !string.IsNullOrEmpty(emailcomp[1]))
             {
                 if (!localRegex.IsMatch(emailcomp[0])
@@ -120,18 +120,18 @@ namespace OOP_Spring_2015
 
         #region Balance
 
-        public uint Salso()
+        public int Salso()
         {
             return Balance;
         }
 
-        public uint AddSaldo(uint saldo)
+        public int AddSaldo(int saldo)
         {
             Balance += saldo;
             return Balance;
         }
 
-        public uint SubtractSaldo(uint saldo)
+        public int SubtractSaldo(int saldo)
         {
             Balance -= saldo;
             return Balance;

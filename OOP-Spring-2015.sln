@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP-Spring-2015", "OOP-Spring-2015.csproj", "{CBA4DB58-F087-40BC-AB22-4741076EA744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP-Spring-2015-Test", "OOP-Spring-2015-Test\OOP-Spring-2015-Test.csproj", "{EB906C0E-87D5-4D52-A427-99A2101C79D4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{CBA4DB58-F087-40BC-AB22-4741076EA744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA4DB58-F087-40BC-AB22-4741076EA744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA4DB58-F087-40BC-AB22-4741076EA744}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB906C0E-87D5-4D52-A427-99A2101C79D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB906C0E-87D5-4D52-A427-99A2101C79D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB906C0E-87D5-4D52-A427-99A2101C79D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB906C0E-87D5-4D52-A427-99A2101C79D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

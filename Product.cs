@@ -57,7 +57,7 @@ namespace OOP_Spring_2015
         {
             if(productID == 0)
             {
-                throw new NotImplementedException();
+                throw new ArgumentNullException("Product can not have ID 0");
             }
             else
             {
@@ -69,7 +69,7 @@ namespace OOP_Spring_2015
         {
             if(string.IsNullOrEmpty(name))
             {
-                throw new NotImplementedException();
+                throw new ArgumentNullException("Product does not have a name");
             }
             else
             {
@@ -84,7 +84,7 @@ namespace OOP_Spring_2015
 
         public void SetActive(bool active)
         {
-            Active = active;    // Should be deactivated if false
+            Active = active;
         }
 
         public void SetCanBeBoughtOnCredit(bool credit)
