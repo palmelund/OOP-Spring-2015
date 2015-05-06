@@ -91,8 +91,8 @@ namespace OOP_Spring_2015
         string SetEmail(string EMail)
         {
             string[] emailcomp = EMail.Split('@');
-            Regex localRegex = new Regex("^[A-Za-z0-9.-_]+$");
-            Regex domainRegex = new Regex("^[A-Za-z0-9.-]+$");
+            Regex localRegex = new Regex("^[A-Za-z0-9/.-_]+$");
+            Regex domainRegex = new Regex("^[A-Za-z0-9/.-]+$");
             if (emailcomp.Length == 2 && !string.IsNullOrEmpty(emailcomp[0]) && !string.IsNullOrEmpty(emailcomp[1]))
             {
                 if (!localRegex.IsMatch(emailcomp[0])
