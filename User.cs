@@ -49,7 +49,7 @@ namespace OOP_Spring_2015
         {
             UserID = userID;
             FirstName = CheckIfEmpty(firstName);
-            LastName = CheckIfEmpty(firstName);
+            LastName = CheckIfEmpty(lastName);
             Username = SetUsername(CheckIfEmpty(username));
             EMail = SetEmail(CheckIfEmpty(EMail));
             Balance = 0;
@@ -146,6 +146,11 @@ namespace OOP_Spring_2015
 
         public override bool Equals(object obj)
         {
+            if(obj == null)
+            {
+                return false;
+            }
+
             User user = (obj as User);
             if (user == null)
             {
@@ -164,7 +169,11 @@ namespace OOP_Spring_2015
 
         public int CompareTo(object obj)
         {
-            if (obj == null) return 1;
+            if (obj == null)
+            {
+                //return 1;
+                throw new ArgumentNullException();
+            }
 
             User user = obj as User;
             if (user != null)
