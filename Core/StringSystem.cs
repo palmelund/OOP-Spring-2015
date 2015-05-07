@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace OOP_Spring_2015
 {
-    public class StringSystem
+    public class StringSystem : IStringSystem
     {
         public Dictionary<uint, Transaction> transactions = new Dictionary<uint, Transaction>();
         public Dictionary<uint, Product> products = new Dictionary<uint, Product>();
@@ -34,15 +34,8 @@ namespace OOP_Spring_2015
 
         public void ExecuteTransaction(Transaction transaction)
         {
-            try
-            {
-                transaction.Execute();
-                transactions.Add(transaction.TransactionID, transaction);
-            }
-            catch (Exception)
-            {
-                //Implement
-            }
+            transaction.Execute();
+            transactions.Add(transaction.TransactionID, transaction);
         }
 
         public Product GetProduct(uint id)
@@ -58,6 +51,7 @@ namespace OOP_Spring_2015
                 throw new ProductDoesNotExistException("Product does not exist");
             }
         }
+
         public User GetUser(string username)
         {
             foreach (var item in users)

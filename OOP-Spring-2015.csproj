@@ -46,6 +46,7 @@
     <Compile Include="Core\Product.cs" />
     <Compile Include="Exceptions\ProductDoesNotExistException.cs" />
     <Compile Include="Core\ProductsReader.cs" />
+    <Compile Include="Core\IStringSystem.cs" />
     <Compile Include="Parser\StringSystemCommandParser.cs" />
     <Compile Include="UserInterface\IStringSystemUI.cs" />
     <Compile Include="Program.cs" />

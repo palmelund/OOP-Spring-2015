@@ -83,10 +83,10 @@ namespace OOP_Spring_2015
             return Price;
         }
 
-        public bool SetActive(bool active)
+        public void SetActive(bool active)
         {
             Active = active;
-            return Active;
+            Console.WriteLine("Is Active");
         }
 
         public bool SetCanBeBoughtOnCredit(bool credit)

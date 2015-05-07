@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
-    class StringSystemCLI : IStringSystemUI
+    public class StringSystemCLI : IStringSystemUI
     {
         StringSystem stringsystem;
 
         public StringSystemCLI(StringSystem stringsystem)
         {
             this.stringsystem = stringsystem;
-            User user = new User((uint)stringsystem.users.Count, "frederik", "palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
-            stringsystem.users.Add(user.UserID, user);
+            //User user = new User((uint)stringsystem.users.Count, "frederik", "palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
+            //stringsystem.users.Add(user.UserID, user);
             Start(); // <- Dont call here
-            user.AddToBalance(2000);
-            Console.WriteLine(user.Balance);
-            stringsystem.BuyProduct(user, stringsystem.products[11]);
-            Console.WriteLine(user.Balance);
-            stringsystem.BuyProduct(user, stringsystem.products[11]);
-            Console.WriteLine(user.Balance);
+            //user.AddToBalance(2000);
+            //Console.WriteLine(user.Balance);
+            //stringsystem.BuyProduct(user, stringsystem.products[11]);
+            //Console.WriteLine(user.Balance);
+            //stringsystem.BuyProduct(user, stringsystem.products[11]);
+            //Console.WriteLine(user.Balance);
 
 
             foreach (var item in stringsystem.transactions)
@@ -39,7 +39,7 @@ namespace OOP_Spring_2015
             WriteActiveProducts();
         }
 
-        void WriteActiveProducts()
+        public void WriteActiveProducts()
         {
             Console.WriteLine(String.Format("|{0,5}|{1,-35}|{2,8}|", "ID", "Product", "Price"));
             WriteProductSeparationLine();
@@ -109,10 +109,7 @@ namespace OOP_Spring_2015
 
         public void DisplayUserBuysProduct(Transaction transaction, uint count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine("Completed Transaction:\n" + transaction);
-            }
+                Console.WriteLine("Completed " + count + " transactions:\n" + transaction);
         }
 
         public void Close()
@@ -120,7 +117,7 @@ namespace OOP_Spring_2015
             System.Environment.Exit(0);
         }
 
-        public void DisplayInsufficientCash(User user)
+        public void DisplayInsufficientCash(User user) //Add product?
         {
             Console.WriteLine("User [{0}] does not sufficient funds to complete transaction.", user.Username);
         }
