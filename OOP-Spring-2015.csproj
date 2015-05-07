@@ -46,11 +46,13 @@
     <Compile Include="Core\Product.cs" />
     <Compile Include="Exceptions\ProductDoesNotExistException.cs" />
     <Compile Include="Core\ProductsReader.cs" />
+    <Compile Include="Parser\StringSystemCommandParser.cs" />
+    <Compile Include="UserInterface\IStringSystemUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Core\SeasonalProduct.cs" />
     <Compile Include="Core\StringSystem.cs" />
     <Compile Include="UserInterface\StringSystemCLI.cs" />
-    <Compile Include="Test\Test.cs" />
+    <Compile Include="Test\TestUser.cs" />
     <Compile Include="Core\Transaction.cs" />
     <Compile Include="Core\User.cs" />
   </ItemGroup>

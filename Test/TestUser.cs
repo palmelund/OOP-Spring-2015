@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace OOP_Spring_2015.Test
+namespace OOP_Spring_2015
 {
     [TestFixture]
-    class Test
+    class TestUser
     {
         #region Firstname
 

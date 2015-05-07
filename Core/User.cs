@@ -51,8 +51,9 @@ namespace OOP_Spring_2015
             FirstName = CheckIfEmpty(firstName);
             LastName = CheckIfEmpty(lastName);
             Username = SetUsername(CheckIfEmpty(username));
-            EMail = SetEmail(CheckIfEmpty(EMail));
+            this.EMail = SetEmail(CheckIfEmpty(EMail));
             Balance = 0;
+
         }
 
         #region Set

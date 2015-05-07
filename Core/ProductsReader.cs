@@ -15,7 +15,8 @@ namespace OOP_Spring_2015
         public ProductsReader()
         {
             string[] productsString = File.ReadAllLines("..\\..\\Ressources\\products.csv", Encoding.UTF7);
-            for (int i = 1; i < productsString.Length; i++) // <- start at 1 as first line isn't for sale.
+            int stringLength = productsString.Length;
+            for (int i = 1; i < stringLength; i++) // <- start at 1 as first line isn't for sale.
             {
                 // http://www.dotnetperls.com/remove-html-tags
                 productsString[i] = Regex.Replace(productsString[i], "<.*?>", string.Empty);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
-    class BuyTransaction : Transaction
+    public class BuyTransaction : Transaction
     {
         public Product product
         {
@@ -20,11 +20,11 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public BuyTransaction(uint id, User user, DateTime date,Product product)
+        public BuyTransaction(uint id, User user, Product product)
         {
             TransactionID = id;
             this.user = SetUser(user);
-            this.date = SetDate(date);
+            date = SetDate(DateTime.Now);
             this.product = product;
             Amount = product.Price;
         }
@@ -43,7 +43,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "Purchase:: ID: " + TransactionID + " user: " + user + " amount: " + Amount + " date: " + date;
+            return "Purchase:: ID: " + TransactionID + " user: " + user + " Product: \"" + product.Name + "\" amount: " + Amount + " date: " + date;
         }
     }
 }

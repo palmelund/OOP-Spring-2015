@@ -15,20 +15,20 @@ namespace OOP_Spring_2015
 
         public StringSystem()
         {
-            ProductsReader productsReader = new ProductsReader();
+                        ProductsReader productsReader = new ProductsReader();
             products = productsReader.GetProductDictionary();
         }
 
         public void BuyProduct(User user, Product product)
         {
-            BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, DateTime.Now, product);
+            BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, product);
             ExecuteTransaction(transaction);
 
         }
 
         public void AddCreditToAccount(User user, uint amount)
         {
-            InsertCashTransaction transaction = new InsertCashTransaction((uint)transactions.Count, user, DateTime.Now, amount);
+            InsertCashTransaction transaction = new InsertCashTransaction((uint)transactions.Count, user, amount);
             ExecuteTransaction(transaction);
         }
 
