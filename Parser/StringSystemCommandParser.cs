@@ -24,33 +24,59 @@ namespace OOP_Spring_2015
             com.Add(":crediton", s => stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(true));
             com.Add(":creditoff", s => stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(false));
             com.Add(":addcredits", s => stringsystem.users[(stringsystem.GetUser(s[1])).UserID].AddToBalance(int.Parse(s[2])));
-            //com.Add(":active", () => );
-            //com[":q"].Invoke();
+
         }
 
         public void ParseCommand(string command)
         {
-            if(command.StartsWith(":"))
+            string[] s = command.Split(' ');
+         
+            if(s[0].StartsWith(":"))
             {
-                string[] s = command.Split(' ');
                 com[s[0]].Invoke(s);
             }
             else
             {
-                string[] s = command.Split(' ');
+                User user;
+                user = stringsystem.GetUser(s[0]);
+
+                if(s.Length == 1)
+                {
+                    cli.DisplayUserInfo(s[0]);
+                }
+                else if (s.Length == 2)
+                {
+                    uint productID;
+                    bool isNumber = uint.TryParse(s[1], out productID);
+                    stringsystem.BuyProduct(user, productID);
+                    cli.DisplayUserBuysProduct(productID);
+                }
+                else if (s.Length == 3)
+                {
+                    uint productID;
+                    int numberOfProducts;
+
+                    bool isIDNumber = uint.TryParse(s[2], out productID);
+                    bool isValidNumber = int.TryParse(s[1], out numberOfProducts);
+
+                    if(isIDNumber == false ||isValidNumber == false)
+                    {
+                        throw new ArgumentException("Argument is NaN");
+                    }
+
+                    for (int i = 0; i < numberOfProducts; i++)
+                    {
+                        stringsystem.BuyProduct(user, productID);
+                        cli.DisplayUserBuysProduct(productID);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Too many arguments");
+                }
+
             }
 
         }
-
-        //void Command(string command, Action action)
-        //{
-        //    com.Add(":q", () => cli.Close());
-        //}
-
-        //void Command(string command, Action action)
-        //{
-        //    string[] s = command.Split(' ');
-        //    com.Add(s[0], () => stringsystem.products[s[1]].SetActive(true));
-        //}
     }
 }

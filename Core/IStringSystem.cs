@@ -13,7 +13,7 @@ namespace OOP_Spring_2015
         void ExecuteTransaction(Transaction transaction);
         Product GetProduct(uint id);
         User GetUser(string username);
-        List<Transaction> GetTransactionList(User user, int numberOfTransactions);
+        List<Transaction> GetTransactionList(uint UserID);
         List<Product> GetActiveProducts();
     }
 }

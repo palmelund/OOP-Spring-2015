@@ -13,30 +13,31 @@ namespace OOP_Spring_2015
         public StringSystemCLI(StringSystem stringsystem)
         {
             this.stringsystem = stringsystem;
-            //User user = new User((uint)stringsystem.users.Count, "frederik", "palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
-            //stringsystem.users.Add(user.UserID, user);
-            Start(); // <- Dont call here
-            //user.AddToBalance(2000);
-            //Console.WriteLine(user.Balance);
-            //stringsystem.BuyProduct(user, stringsystem.products[11]);
-            //Console.WriteLine(user.Balance);
-            //stringsystem.BuyProduct(user, stringsystem.products[11]);
-            //Console.WriteLine(user.Balance);
 
+            //foreach (var item in stringsystem.transactions)
+            //{
+            //    Console.WriteLine(item.Value);
+            //}
 
-            foreach (var item in stringsystem.transactions)
-            {
-                Console.WriteLine(item.Value);
-            }
-
-            DisplayUserInfo("thepalmelund");
+            //DisplayUserInfo("thepalmelund");
 
             //Close();
         }
 
-        public void Start()
+        public void Start(StringSystemCommandParser parser)
         {
-            WriteActiveProducts();
+            string input;
+
+            while(true)
+            {
+                WriteActiveProducts();
+                Console.Write(">> ");
+                input = Console.ReadLine();
+                parser.ParseCommand(input);
+                Console.WriteLine("Press any key to clear screen and promt for new input:");
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
 
         public void WriteActiveProducts()
@@ -84,7 +85,22 @@ namespace OOP_Spring_2015
                 if(item.Value.Username.Equals(username))
                 {
                     User user = item.Value;
-                    Console.WriteLine(user);
+                    Console.WriteLine("Username: " + user.Username + "\nIRL Name: " + user.FirstName + " " + user.LastName + "\nBalance: " + user.Balance);
+
+                    List<BuyTransaction> buyTransactions = stringsystem.GetBuyTransactionList(user.UserID, 10);
+
+                    Console.WriteLine("\nLatest [" + buyTransactions.Count + "] transactions:");
+
+                    foreach (var t in buyTransactions)
+                    {
+                        Console.WriteLine(t);
+                    }
+
+                    if(user.Balance < 5000)
+                    {
+                        Console.WriteLine("\n!!!WARNING!!! LOW BALANCE !!! CURRENTLY: {0,5:N2} !!!", ((double)user.Balance)/100);
+                    }
+
                     return;
                 }
             }
@@ -102,9 +118,9 @@ namespace OOP_Spring_2015
             Console.WriteLine("The AdminCommandLine [{0}] could not be found.", arg);
         }
 
-        public void DisplayUserBuysProduct(BuyTransaction transaction)
+        public void DisplayUserBuysProduct(uint productID)
         {
-            Console.WriteLine("Completed Transaction:\n" + transaction);
+            Console.WriteLine("Bought product [{0}]:\n{1}", productID, stringsystem.GetProduct(productID));
         }
 
         public void DisplayUserBuysProduct(Transaction transaction, uint count)

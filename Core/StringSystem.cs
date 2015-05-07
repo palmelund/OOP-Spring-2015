@@ -15,15 +15,25 @@ namespace OOP_Spring_2015
 
         public StringSystem()
         {
-                        ProductsReader productsReader = new ProductsReader();
+            ProductsReader productsReader = new ProductsReader();
             products = productsReader.GetProductDictionary();
+
+            User user = new User((uint)users.Count, "Frederik", "Palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
+            users.Add(user.UserID, user);
         }
 
         public void BuyProduct(User user, Product product)
         {
             BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, product);
             ExecuteTransaction(transaction);
+        }
 
+        public void BuyProduct(User user, uint productID)
+        {
+            Product product = GetProduct(productID);
+
+            BuyTransaction transaction = new BuyTransaction((uint)transactions.Count, user, product);
+            ExecuteTransaction(transaction);
         }
 
         public void AddCreditToAccount(User user, uint amount)
@@ -64,24 +74,42 @@ namespace OOP_Spring_2015
             throw new UserDoesNotExistException();
         }
 
-        public List<Transaction> GetTransactionList(User user, int numberOfTransactions)
+        public List<Transaction> GetTransactionList(uint userID)
         {
             List<Transaction> trans = new List<Transaction>();
             int itemsAdded = 0;
 
             foreach (var item in transactions)
             {
-                if(itemsAdded == numberOfTransactions)
+                if (item.Value.user.UserID == userID)
+                {
+                    trans.Add(item.Value);
+                    itemsAdded++;
+                }
+            }
+
+            return trans;
+        }
+
+        public List<BuyTransaction> GetBuyTransactionList(uint userID, int numberOfTransactions)
+        {
+            List<BuyTransaction> trans = new List<BuyTransaction>();
+            int itemsAdded = 0;
+
+            List<Transaction> transactionList = GetTransactionList(userID);
+
+            transactionList.Reverse();
+
+            foreach (Transaction item in transactionList)
+            {
+                if (item is BuyTransaction)
+                {
+                    trans.Add(item as BuyTransaction);
+                    itemsAdded++;
+                }
+                if (itemsAdded == numberOfTransactions)
                 {
                     break;
-                }
-                else
-                {
-                    if(item.Value.user.Equals(user))
-                    {
-                        trans.Add(item.Value);
-                        itemsAdded++;
-                    }
                 }
             }
 

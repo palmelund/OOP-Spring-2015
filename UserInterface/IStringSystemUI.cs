@@ -13,7 +13,7 @@ namespace OOP_Spring_2015
         void DisplayUserInfo(string username);
         void DisplayTooManyArgumentsError(string arg);
         void DisplayAdminCommandNotFoundMessage(string arg);
-        void DisplayUserBuysProduct(BuyTransaction transaction);
+        void DisplayUserBuysProduct(uint productID);
         void DisplayUserBuysProduct(Transaction transaction, uint count);
         void Close();
         void DisplayInsufficientCash(User user);
