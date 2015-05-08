@@ -1,5 +1,8 @@
 language: csharp
 solution: OOP-Spring-2015.sln
+install:
+  - sudo apt-get install -y gtk-sharp2
+  - nuget restore OOP-Spring-2015.sln
 
 env:
   global:
