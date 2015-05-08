@@ -1,21 +1,2 @@
 language: csharp
 solution: OOP-Spring-2015.sln
-install:
-  - sudo apt-get install -y gtk-sharp2
-  - nuget restore OOP-Spring-2015.sln
-
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "Y0MSCDS+30Z8kctNJxMxj7DYFKvZpPUZcpXN2pSXjXHmPOW5JilLyIAcy+8o4mMxF+6IFKEplPIukB75CbUV2b85ALZFSfU4244mXt31Hw7WnlxqdFBVp8DY4J3ijfxlwPBw3KPv4Lu+N2qHBpxIDGQAXg4B/sePXZ4dOLHLb1c="
-
-addons:
-  coverity_scan:
-    project:
-      name: "thepalmelund/OOP-Spring-2015"
-      description: "Build submitted via Travis CI"
-    notification_email: frederik.palmelund@gmail.com
-    build_command_prepend: "msbuild /t:Clean"
-    build_command:   "msbuild /t:Rebuild"
-    branch_pattern: coverity_scan
