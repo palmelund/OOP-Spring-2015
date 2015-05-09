@@ -58,7 +58,7 @@
     <Compile Include="UserInterface\StringSystemCLI.cs" />
     <Compile Include="Core\Transaction.cs" />
     <Compile Include="Core\User.cs" />
-    <Compile Include="UserIO.cs" />
+    <Compile Include="Core\UserIO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
