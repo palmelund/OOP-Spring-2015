@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OOP_Spring_2015;
 using NUnit.Framework;
 
-namespace OOP_Spring_2015
+namespace TestLib
 {
     [TestFixture]
     class TestUser
