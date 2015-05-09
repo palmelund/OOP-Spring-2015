@@ -12,7 +12,8 @@ namespace OOP_Spring_2015
         public Dictionary<uint, Transaction> transactions = new Dictionary<uint, Transaction>();
         public Dictionary<uint, Product> products = new Dictionary<uint, Product>();
         public Dictionary<uint, User> users = new Dictionary<uint, User>();
-        TransactionIO transactionIO;
+        public TransactionIO transactionIO;
+        public UserIO userIO;
 
         /*
          * REMEMBER:
@@ -24,8 +25,7 @@ namespace OOP_Spring_2015
 
         public StringSystem()
         {
-            User user = new User((uint)users.Count, "Frederik", "Palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
-            users.Add(user.UserID, user);
+            userIO = new UserIO(ref users);
 
             ProductsReader productsReader = new ProductsReader();
             products = productsReader.GetProductDictionary();
@@ -43,8 +43,31 @@ namespace OOP_Spring_2015
         {
             Product product = GetProduct(productID);
 
+            if(product.Active == false)
+            {
+                ProductNotActiveException productNotActiveException = new ProductNotActiveException("The product is currently not active");
+                productNotActiveException.Data["product"] = product.Name;
+                productNotActiveException.Data["id"] = product.ProductID;
+                throw productNotActiveException;
+            }
+
             BuyTransaction transaction = new BuyTransaction((uint)transactions.Count, user, product);
             ExecuteTransaction(transaction);
+        }
+
+        public void AddUser(string username, string email, string lastname, string[] firstname)
+        {
+            string fn = string.Empty;
+
+            for(int i = 4; i < firstname.Length; i++)
+            {
+                fn += firstname[i] + " ";
+            }
+
+            User user = new User((uint)users.Count, fn, lastname, username, email);
+            users.Add(user.UserID, user);
+
+            userIO.AddUserToFile(user);
         }
 
         public void AddCreditToAccount(User user, uint amount)
@@ -91,7 +114,9 @@ namespace OOP_Spring_2015
                     return item.Value;
                 }
             }
-            throw new UserDoesNotExistException();
+            UserDoesNotExistException userDoesNotExistException = new UserDoesNotExistException("The user does not exist");
+            userDoesNotExistException.Data["user"] = username;
+            throw userDoesNotExistException;
         }
 
         public List<Transaction> GetTransactionList(uint userID)

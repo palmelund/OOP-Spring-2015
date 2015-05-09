@@ -82,7 +82,6 @@ namespace OOP_Spring_2015
 
         public virtual void Execute()
         {
-
         }
     }
 }

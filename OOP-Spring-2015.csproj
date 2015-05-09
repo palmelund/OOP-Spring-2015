@@ -37,6 +37,7 @@
     <None Include="Ressources\eksamensopgave 2015 - stregsystem.pdf" />
     <None Include="Ressources\products.csv" />
     <None Include="Ressources\transactions.log" />
+    <None Include="Ressources\user.csv" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\BuyTransaction.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Test\TestUser.cs" />
     <Compile Include="Core\Transaction.cs" />
     <Compile Include="Core\User.cs" />
+    <Compile Include="UserIO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

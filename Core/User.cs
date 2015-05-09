@@ -128,7 +128,7 @@ namespace OOP_Spring_2015
 
         public void AddToBalance(int amount)
         {
-            Balance += Math.Abs(amount);
+            Balance += amount;
         }
 
         public void SubtractFromBalance(int amount)

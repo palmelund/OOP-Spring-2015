@@ -29,10 +29,10 @@ namespace OOP_Spring_2015
 
         }
 
-        public void Execute(int amount)
+        public override void Execute()
         {
-            user.AddToBalance(amount);
-        }
+            user.AddToBalance((int)Amount);
+         }
 
         public override string ToString()
         {

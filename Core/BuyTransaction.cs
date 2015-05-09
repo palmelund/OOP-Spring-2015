@@ -47,7 +47,10 @@ namespace OOP_Spring_2015
         {
             if(user.Balance < Amount && product.CanBeBoughtOnCredit == false)
             {
-                throw new InsufficientCreditsException("Insufficient funds");
+                InsufficientCreditsException insufficientCreditsException = new InsufficientCreditsException("Insufficient credits to complete transaction");
+                insufficientCreditsException.Data["user"] = user.Username;
+                insufficientCreditsException.Data["product"] = product.Name;
+                throw insufficientCreditsException;
             }
             else
             {

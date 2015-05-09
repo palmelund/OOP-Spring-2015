@@ -13,15 +13,6 @@ namespace OOP_Spring_2015
         public StringSystemCLI(StringSystem stringsystem)
         {
             this.stringsystem = stringsystem;
-
-            //foreach (var item in stringsystem.transactions)
-            //{
-            //    Console.WriteLine(item.Value);
-            //}
-
-            //DisplayUserInfo("thepalmelund");
-
-            //Close();
         }
 
         public void Start(StringSystemCommandParser parser)
@@ -68,14 +59,19 @@ namespace OOP_Spring_2015
 
         //=== INTERFACE IMPLEMENTATION ===//
 
-        public void DisplayUserNotFound(string username)
+        public void DisplayUserNotFound(Exception ex)
         {
-            Console.WriteLine("User: [" + username + "] not found.");
+            Console.WriteLine("{0}: {1}", ex.Message, ex.Data["user"]);
         }
 
-        public void DisplayProductNotFound(uint id)
+        public void DisplayProductNotFound(Exception ex)
         {
-            Console.WriteLine("The product [" + id + "] does not exist, or is not avalable.");
+            Console.WriteLine("{0}: {1}", ex.Message, ex.Data["product"]);
+        }
+
+        public void DisplayProductNotActive(Exception ex)
+        {
+            Console.WriteLine("{0}: {1} - {2}", ex.Message, ex.Data["id"], ex.Data["product"]);
         }
 
         public void DisplayUserInfo(string username)
@@ -85,7 +81,7 @@ namespace OOP_Spring_2015
                 if(item.Value.Username.Equals(username))
                 {
                     User user = item.Value;
-                    Console.WriteLine("Username: " + user.Username + "\nIRL Name: " + user.FirstName + " " + user.LastName + "\nBalance: " + user.Balance);
+                    Console.WriteLine("Username: " + user.Username + "\nIRL Name: " + user.FirstName  + user.LastName + "\nBalance: " + user.Balance);
 
                     List<BuyTransaction> buyTransactions = stringsystem.GetBuyTransactionList(user.UserID, 10);
 
@@ -100,16 +96,14 @@ namespace OOP_Spring_2015
                     {
                         Console.WriteLine("\n!!!WARNING!!! LOW BALANCE !!! CURRENTLY: {0,5:N2} !!!", ((double)user.Balance)/100);
                     }
-
                     return;
                 }
             }
-            DisplayUserNotFound(username);
         }
 
         public void DisplayTooManyArgumentsError(string arg)
         {
-            Console.Write("Could not understand command input: " + arg);
+            Console.Write("Too many arguments! The program supports a maximum total of three (3): " + arg);
 
         }
 
@@ -133,9 +127,9 @@ namespace OOP_Spring_2015
             System.Environment.Exit(0);
         }
 
-        public void DisplayInsufficientCash(User user) //Add product?
+        public void DisplayInsufficientCash(Exception ex)
         {
-            Console.WriteLine("User [{0}] does not sufficient funds to complete transaction.", user.Username);
+            Console.WriteLine("User [{0}] does not sufficient funds to complete transaction for product \"{1}\"", ex.Data["user"], ex.Data["product"]);
         }
 
         public void DisplayGeneralError(string errorString)
