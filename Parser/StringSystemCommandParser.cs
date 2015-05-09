@@ -23,8 +23,7 @@ namespace OOP_Spring_2015
             com.Add(":deactivate", s => stringsystem.products[uint.Parse(s[1])].SetActive(false));
             com.Add(":crediton", s => stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(true));
             com.Add(":creditoff", s => stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(false));
-            com.Add(":addcredits", s => stringsystem.users[(stringsystem.GetUser(s[1])).UserID].AddToBalance(int.Parse(s[2])));
-
+            com.Add(":addcredits", s => stringsystem.AddCreditToAccount(stringsystem.GetUser(s[1]), uint.Parse(s[2])));
         }
 
         public void ParseCommand(string command)

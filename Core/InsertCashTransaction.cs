@@ -16,6 +16,19 @@ namespace OOP_Spring_2015
             this.Amount = amount;
         }
 
+        public InsertCashTransaction(uint id, User user, uint amount, string date)
+        {
+            TransactionID = id;
+            this.user = user;
+            this.date = SetDateFromString(date);
+            this.Amount = amount;
+        }
+
+        public InsertCashTransaction()
+        {
+
+        }
+
         public void Execute(int amount)
         {
             user.AddToBalance(amount);

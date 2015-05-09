@@ -29,6 +29,20 @@ namespace OOP_Spring_2015
             Amount = product.Price;
         }
 
+        public BuyTransaction(uint id, User user, Product product, uint amount, string date)
+        {
+            TransactionID = id;
+            this.user = SetUser(user);
+            this.date = SetDateFromString(date);
+            this.product = product;
+            Amount = amount;
+        }
+
+        public BuyTransaction()
+        {
+
+        }
+
         public override void Execute()
         {
             if(user.Balance < Amount && product.CanBeBoughtOnCredit == false)

@@ -69,6 +69,12 @@ namespace OOP_Spring_2015
             }
         }
 
+        protected DateTime SetDateFromString(string date)
+        {
+            DateTime dt = Convert.ToDateTime(date);
+            return dt;
+        }
+
         public override string ToString()
         {
             return "ID: " + TransactionID + " Amount: " + Amount + " Date: " + date;

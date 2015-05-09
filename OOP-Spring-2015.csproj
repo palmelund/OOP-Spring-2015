@@ -36,9 +36,11 @@
     <None Include="packages.config" />
     <None Include="Ressources\eksamensopgave 2015 - stregsystem.pdf" />
     <None Include="Ressources\products.csv" />
+    <None Include="Ressources\transactions.log" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\BuyTransaction.cs" />
+    <Compile Include="Core\TransactionIO.cs" />
     <Compile Include="Exceptions\ProductNotActiveException.cs" />
     <Compile Include="Exceptions\UserDoesNotExistException.cs" />
     <Compile Include="Core\InsertCashTransaction.cs" />

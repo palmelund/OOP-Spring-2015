@@ -12,14 +12,25 @@ namespace OOP_Spring_2015
         public Dictionary<uint, Transaction> transactions = new Dictionary<uint, Transaction>();
         public Dictionary<uint, Product> products = new Dictionary<uint, Product>();
         public Dictionary<uint, User> users = new Dictionary<uint, User>();
+        TransactionIO transactionIO;
+
+        /*
+         * REMEMBER:
+         * Load order:
+         * USER
+         * PRODUCT
+         * TRANSACTION
+         */
 
         public StringSystem()
         {
+            User user = new User((uint)users.Count, "Frederik", "Palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
+            users.Add(user.UserID, user);
+
             ProductsReader productsReader = new ProductsReader();
             products = productsReader.GetProductDictionary();
 
-            User user = new User((uint)users.Count, "Frederik", "Palmelund", "thepalmelund", "frederik.palmelund@gmail.com");
-            users.Add(user.UserID, user);
+            transactionIO = new TransactionIO(this, ref transactions);
         }
 
         public void BuyProduct(User user, Product product)
@@ -46,6 +57,15 @@ namespace OOP_Spring_2015
         {
             transaction.Execute();
             transactions.Add(transaction.TransactionID, transaction);
+
+            if(transaction is BuyTransaction)
+            {
+                transactionIO.WriteTransactionToLog(transaction as BuyTransaction);
+            }
+            else if (transaction is InsertCashTransaction)
+            {
+                transactionIO.WriteTransactionToLog(transaction as InsertCashTransaction);
+            }
         }
 
         public Product GetProduct(uint id)
