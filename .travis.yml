@@ -1,8 +1,2 @@
 language: csharp
 solution: OOP-Spring-2015.sln
-install:
-  - nuget restore OOP-Spring-2015.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
-script:
-  - xbuild /p:Configuration=Release OOP-Spring-2015.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./OOP-Spring-2015/TestLib/bin/Release/TestLib.dll
