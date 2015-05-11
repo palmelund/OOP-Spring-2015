@@ -25,12 +25,20 @@ namespace OOP_Spring_2015
 
         public StringSystem()
         {
-            userIO = new UserIO(ref users);
+            try
+            {
+                userIO = new UserIO(ref users);
 
-            ProductsReader productsReader = new ProductsReader();
-            products = productsReader.GetProductDictionary();
+                ProductsReader productsReader = new ProductsReader();
+                products = productsReader.GetProductDictionary();
 
-            transactionIO = new TransactionIO(this, ref transactions);
+                transactionIO = new TransactionIO(this, ref transactions);
+            }
+            catch (Exception ex) // <- If this catches anything, the program shouldn't be run as something went wrong with loading the files, and may not work properly.
+            {
+                StringSystemCLI cli = new StringSystemCLI(this);
+                cli.DisplayCriticalError(ex);
+            }
         }
 
         public void BuyProduct(User user, Product product)
@@ -101,7 +109,9 @@ namespace OOP_Spring_2015
             }
             else
             {
-                throw new ProductDoesNotExistException("Product does not exist");
+                ProductDoesNotExistException productDoesNotExistException = new ProductDoesNotExistException("Product does not exist");
+                productDoesNotExistException.Data["product"] = id;
+                throw productDoesNotExistException;
             }
         }
 

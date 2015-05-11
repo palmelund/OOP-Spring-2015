@@ -11,20 +11,35 @@ namespace OOP_Spring_2015
         StringSystemCLI cli;
         StringSystem stringsystem;
 
-        public Dictionary<string, Action<string[]>> com = new Dictionary<string, Action<string[]>>();
+        public Dictionary<string, Action<string[]>> commandDictionary = new Dictionary<string, Action<string[]>>();
 
         public StringSystemCommandParser(StringSystemCLI cli, StringSystem stringsystem)
         {
             this.cli = cli;
             this.stringsystem = stringsystem;
-            com.Add(":q", s => cli.Close());
-            com.Add(":quit", s => cli.Close());
-            com.Add(":activate", s => this.stringsystem.products[uint.Parse(s[1])].SetActive(true));
-            com.Add(":deactivate", s => this.stringsystem.products[uint.Parse(s[1])].SetActive(false));
-            com.Add(":crediton", s => this.stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(true));
-            com.Add(":creditoff", s => this.stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(false));
-            com.Add(":addcredits", s => this.stringsystem.AddCreditToAccount(this.stringsystem.GetUser(s[1]), uint.Parse(s[2])));
-            com.Add(":adduser", s => this.stringsystem.AddUser(s[1], s[2], s[3], s));
+
+            // Add admin command to commandDictionary
+
+            // Quits the program
+            commandDictionary.Add(":q", s => cli.Close());
+            commandDictionary.Add(":quit", s => cli.Close());
+
+            // Activate or deactivate a product - :activate <productID>
+            // Example - :activate 1
+            commandDictionary.Add(":activate", s => this.stringsystem.products[uint.Parse(s[1])].SetActive(true));
+            commandDictionary.Add(":deactivate", s => this.stringsystem.products[uint.Parse(s[1])].SetActive(false));
+
+            // Activate ir deactivate credit for product, allowing user to overdraw on their account - :crediton <productID>
+            // Example - :crediton 1
+            commandDictionary.Add(":crediton", s => this.stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(true));
+            commandDictionary.Add(":creditoff", s => this.stringsystem.products[uint.Parse(s[1])].SetCanBeBoughtOnCredit(false));
+            
+            // Add credits to existing account. Added credits are in øre (1/100 kr) - :addcredits <username> <amount>
+            // Example - :addcredits user 10000
+            commandDictionary.Add(":addcredits", s => this.stringsystem.AddCreditToAccount(this.stringsystem.GetUser(s[1]), uint.Parse(s[2])));
+            
+            // Add new user to the system. Username is added last, but will include all first names and middle names - :adduser <username> <email> <lastname> <firstname(s)>
+            commandDictionary.Add(":adduser", s => this.stringsystem.AddUser(s[1], s[2], s[3], s));
         }
 
         // Since ParseCommand is responsible for all user input, it will also be responsible for handling all errors
@@ -36,7 +51,7 @@ namespace OOP_Spring_2015
             {
                 if (s[0].StartsWith(":"))
                 {
-                    com[s[0]].Invoke(s);
+                    commandDictionary[s[0]].Invoke(s);
                 }
                 else
                 {
@@ -71,15 +86,24 @@ namespace OOP_Spring_2015
                         bool isIDNumber = uint.TryParse(s[2], out productID);
                         bool isValidNumber = uint.TryParse(s[1], out numberOfProducts);
 
-                        if (isIDNumber == false || isValidNumber == false)
+                        if(isIDNumber == false)
                         {
-                            throw new ArgumentException("Argument is not a number or negative");
+                            ProductDoesNotExistException productDoesNotExistException = new ProductDoesNotExistException("The product does not exist");
+                            productDoesNotExistException.Data["product"] = productID;
+                            throw productDoesNotExistException;
                         }
-
-                        for (int i = 0; i < numberOfProducts; i++)
+                        else if(isValidNumber == false)
                         {
-                            stringsystem.BuyProduct(user, productID);
-                            cli.DisplayUserBuysProduct(productID);
+                            ArgumentOutOfRangeException argumentOutOfRangeExcaption = new ArgumentOutOfRangeException("The number of products requested can not be fulfilled as it is not valid.");
+                            throw argumentOutOfRangeExcaption;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < numberOfProducts; i++)
+                            {
+                                stringsystem.BuyProduct(user, productID);
+                                cli.DisplayUserBuysProduct(productID);
+                            }
                         }
                     }
                     else
@@ -89,6 +113,8 @@ namespace OOP_Spring_2015
                 }
             }
             // User defined exceptions
+            // Sending the exception to the CLI, as the userdefined exceptions can contain additional info that
+            // has to bee shown to the user.
             catch(UserDoesNotExistException ex)
             {
                 cli.DisplayUserNotFound(ex);
@@ -106,14 +132,19 @@ namespace OOP_Spring_2015
                 cli.DisplayInsufficientCash(ex);
             }
             // Build-In Exceptions
-            //catch (KeyNotFoundException ex)
-            //{
-            //    cli.DisplayGeneralError("Admin key not legal");
-            //}
+            catch (KeyNotFoundException ex)
+            {
+                cli.DisplayAdminCommandNotFoundMessage(command); // <- this is the only place a dictionary should be able to get a valid key: AdminCommands.
+            }
+            catch (ArgumentNullException ex)
+            {
+                cli.DisplayGeneralError(ex.Message);
+            }
             catch (Exception ex)
             {
                 cli.DisplayGeneralError(ex.Message);
             }
+            // No final, as the program returns to get new input here.
         }
     }
 }

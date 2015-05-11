@@ -8,6 +8,7 @@ namespace OOP_Spring_2015
 {
     public interface IStringSystemUI
     {
+        //TODO: ADD NEW METHODS TO INTERFACE
         // Because it's the cli's job to display the exception to the user
         void DisplayUserNotFound(Exception ex);
         void DisplayProductNotFound(Exception ex);

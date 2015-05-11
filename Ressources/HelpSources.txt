@@ -1,1 +1,13 @@
-﻿http://stackoverflow.com/questions/12350801/check-string-for-invalid-characters-smartest-way
+﻿Til at undersøge navne og email: http://stackoverflow.com/questions/12350801/check-string-for-invalid-characters-smartest-way
+Fjerne HTML tags: http://www.dotnetperls.com/remove-html-tags
+Rydde en fil før der skrives igen (Til opdatering af bruger): http://stackoverflow.com/questions/4999988/to-clear-the-contents-of-a-file
+Let tilføje ny linje til bunden af en fil: http://stackoverflow.com/questions/2837020/open-existing-file-append-a-single-line
+Afslutte programmet gennem metodekald: http://stackoverflow.com/questions/12977924/how-to-properly-exit-a-c-sharp-application
+Tegne ÆØÅ i CMD: http://stackoverflow.com/questions/5750203/how-to-write-unicode-chars-to-console
+Få nuværende tid på dagen: http://stackoverflow.com/questions/296920/how-do-you-get-the-current-time-of-day
+
+
+MSDN - hjælp og opslag til mange ting, inklusiv men ikke begrænset til:
+- Exceptions
+- Dictionaries
+- Textformattering

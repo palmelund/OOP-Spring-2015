@@ -14,17 +14,24 @@ namespace OOP_Spring_2015
 
         public ProductsReader()
         {
-            string[] productsString = File.ReadAllLines("..\\..\\Ressources\\products.csv", Encoding.UTF7);
-            int stringLength = productsString.Length;
-            for (int i = 1; i < stringLength; i++) // <- start at 1 as first line isn't for sale.
+            try
             {
-                // http://www.dotnetperls.com/remove-html-tags
-                productsString[i] = Regex.Replace(productsString[i], "<.*?>", string.Empty);
-                productsString[i] = productsString[i].Replace("\"", "");
-                string[] split = productsString[i].Split(';');
-                Product product = new Product(uint.Parse(split[0]), split[1], uint.Parse(split[2]), split[3].Equals("1") ? true : false);
+                string[] productsString = File.ReadAllLines("..\\..\\Ressources\\products.csv", Encoding.UTF7);
+                int stringLength = productsString.Length;
+                for (int i = 1; i < stringLength; i++) // <- start at 1 as first line isn't for sale.
+                {
+                    // http://www.dotnetperls.com/remove-html-tags
+                    productsString[i] = Regex.Replace(productsString[i], "<.*?>", string.Empty);
+                    productsString[i] = productsString[i].Replace("\"", "");
+                    string[] split = productsString[i].Split(';');
+                    Product product = new Product(uint.Parse(split[0]), split[1], uint.Parse(split[2]), split[3].Equals("1") ? true : false);
 
-                products.Add(product.ProductID, product);
+                    products.Add(product.ProductID, product);
+                }
+            }
+            catch (Exception)
+            {
+                throw new FileNotFoundException("Product file not found");
             }
         }
 

@@ -15,11 +15,12 @@ namespace OOP_Spring_2015
             this.stringsystem = stringsystem;
         }
 
+        // Run on program start, and will continue to do so until program is closed
         public void Start(StringSystemCommandParser parser)
         {
             string input;
 
-            while(true)
+            while(true) // <- no need to use break, Close() quits the application by other means.
             {
                 WriteActiveProducts();
                 Console.Write(">> ");
@@ -27,13 +28,14 @@ namespace OOP_Spring_2015
                 parser.ParseCommand(input);
                 Console.WriteLine("Press any key to clear screen and promt for new input:");
                 Console.ReadKey();
-                Console.Clear();
+                Console.Clear(); // <- in place so other users dont scroll through use history
             }
         }
 
+        // Writes all active product formatted as seen in example picture.
         public void WriteActiveProducts()
         {
-            Console.WriteLine(String.Format("|{0,5}|{1,-35}|{2,8}|", "ID", "Product", "Price"));
+            Console.WriteLine(String.Format("|{0,5}|{1,-35}|{2,8}|", "ID", "Product", "Price")); // <- Currently have space for all products (including inactive) but may not suffice for future products
             WriteProductSeparationLine();
 
             foreach (var item in stringsystem.products)
@@ -74,6 +76,8 @@ namespace OOP_Spring_2015
             Console.WriteLine("{0}: {1} - {2}", ex.Message, ex.Data["id"], ex.Data["product"]);
         }
 
+        // Displays user info
+        // Text is formatted here instead of in User to give bigger freedom for formatting.
         public void DisplayUserInfo(string username)
         {
             foreach (var item in stringsystem.users)
@@ -124,7 +128,9 @@ namespace OOP_Spring_2015
 
         public void Close()
         {
-            System.Environment.Exit(0);
+            System.Environment.Exit(0); // <- the program is closed with exit code 0;
+                                        // No fear of data loss as everything is logged as it happens, and the user cant call
+                                        // Close() while the system is doing so.
         }
 
         public void DisplayInsufficientCash(Exception ex)
@@ -135,6 +141,18 @@ namespace OOP_Spring_2015
         public void DisplayGeneralError(string errorString)
         {
             Console.WriteLine("An error occoured: " + errorString);
+        }
+
+        public void DisplayCriticalError(Exception ex)
+        {
+            Console.WriteLine("Critical Error: {0}", ex.Message);
+            Console.WriteLine("Press <ESC> to stop the program or any other key to continue: ");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if(key.Key.Equals(ConsoleKey.Escape))
+            {
+                Environment.Exit(1);
+            }
+            Console.Clear();
         }
     }
 }

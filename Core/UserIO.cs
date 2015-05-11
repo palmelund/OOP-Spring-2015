@@ -11,18 +11,24 @@ namespace OOP_Spring_2015
     {
         public UserIO(ref Dictionary<uint, User> users)
         {
-            string[] userlist = File.ReadAllLines("..\\..\\Ressources\\user.csv");
-            int stringlength = userlist.Length;
-
-            for(int i = 1; i < stringlength; i++)
+            try
             {
-                string[] split = userlist[i].Split(';');
-                User user = new User(uint.Parse(split[0]), split[2], split[3], split[1], split[4]);
-                user.AddToBalance(int.Parse(split[5]));
+                string[] userlist = File.ReadAllLines("..\\..\\Ressources\\user.csv");
+                int stringlength = userlist.Length;
 
-                users.Add(user.UserID, user);
+                for (int i = 1; i < stringlength; i++)
+                {
+                    string[] split = userlist[i].Split(';');
+                    User user = new User(uint.Parse(split[0]), split[2], split[3], split[1], split[4]);
+                    user.AddToBalance(int.Parse(split[5]));
+
+                    users.Add(user.UserID, user);
+                }
             }
-
+            catch (Exception)
+            {
+                throw new FileNotFoundException("The user file could not be found.");
+            }
         }
 
         public void AddUserToFile(User user)

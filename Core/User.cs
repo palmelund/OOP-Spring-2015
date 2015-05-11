@@ -140,7 +140,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "Name: " + FirstName + " " + LastName + " EMail:" + EMail;
+            return FirstName + LastName + " " + EMail;
         }
         
         public override bool Equals(object obj)
@@ -171,7 +171,7 @@ namespace OOP_Spring_2015
             if (obj == null)
             {
                 //return 1;
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Failed comparing user to null");
             }
 
             User user = obj as User;

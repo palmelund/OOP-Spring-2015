@@ -11,27 +11,37 @@ namespace OOP_Spring_2015
     public class TransactionIO
     {
         StringSystem stringsystem;
+
+        // Loads all transactions into transactions dictionary at startup.
         public TransactionIO(StringSystem stringsystem, ref Dictionary<uint, Transaction> transactions)
         {
-            this.stringsystem = stringsystem;
-
-            string[] transactionList = File.ReadAllLines("..\\..\\Ressources\\transactions.log");
-            foreach (var item in transactionList)
+            try
             {
-                string[] transaction = item.Split(';');
-                if(transaction[0].Equals("BuyTransaction"))
+                this.stringsystem = stringsystem;
+
+                string[] transactionList = File.ReadAllLines("..\\..\\Ressources\\transactions.log");
+                foreach (var item in transactionList)
                 {
-                    User user = stringsystem.GetUser(transaction[2]);
-                    Product product = stringsystem.GetProduct(uint.Parse(transaction[3]));
-                    BuyTransaction buyTransaction = new BuyTransaction(uint.Parse(transaction[1]),user, product, uint.Parse(transaction[4]), transaction[5]);
-                    transactions.Add(buyTransaction.TransactionID, buyTransaction);
+                    string[] transaction = item.Split(';');
+                    // Creates the transaction that matches it's type.
+                    if (transaction[0].Equals("BuyTransaction"))
+                    {
+                        User user = stringsystem.GetUser(transaction[2]);
+                        Product product = stringsystem.GetProduct(uint.Parse(transaction[3]));
+                        BuyTransaction buyTransaction = new BuyTransaction(uint.Parse(transaction[1]), user, product, uint.Parse(transaction[4]), transaction[5]);
+                        transactions.Add(buyTransaction.TransactionID, buyTransaction);
+                    }
+                    else if (transaction[0].Equals("InsertCashTransaction"))
+                    {
+                        User user = stringsystem.GetUser(transaction[2]);
+                        InsertCashTransaction insertCashTransaction = new InsertCashTransaction(uint.Parse(transaction[1]), user, uint.Parse(transaction[3]), transaction[4]);
+                        transactions.Add(insertCashTransaction.TransactionID, insertCashTransaction);
+                    }
                 }
-                else if (transaction[0].Equals("InsertCashTransaction"))
-                {
-                    User user = stringsystem.GetUser(transaction[2]);
-                    InsertCashTransaction insertCashTransaction = new InsertCashTransaction(uint.Parse(transaction[1]), user, uint.Parse(transaction[3]), transaction[4]);
-                    transactions.Add(insertCashTransaction.TransactionID, insertCashTransaction);
-                }
+            }
+            catch (Exception)
+            {
+                throw new FileNotFoundException("Transaction log not found. New log file will be created on first transaction.");
             }
         }
 
@@ -39,6 +49,7 @@ namespace OOP_Spring_2015
         {
             try
             {
+                // Saves info about the transaction base on what transaction that is being saved.
                 if (transaction is BuyTransaction)
                 {
                     BuyTransaction buyTransaction = transaction as BuyTransaction;
@@ -52,10 +63,11 @@ namespace OOP_Spring_2015
                     File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
                 }
 
+                // As the user's balance has also changed after a transaction, the user file is updated accordingly.
                 string[] userfile = File.ReadAllLines("..\\..\\Ressources\\user.csv");
                 for (int i = 1; i < userfile.Length; i++)
                 {
-                    userfile[i] = stringsystem.userIO.FormatUserForSave(stringsystem.users[(uint)i-1]); // -1 as the user is shifted by one compared to line number
+                    userfile[i] = stringsystem.userIO.FormatUserForSave(stringsystem.users[(uint)i-1]); // -1 as the user is shifted by one compared to line number due to header line.
                 }
 
                 File.WriteAllText("..\\..\\Ressources\\user.csv", string.Empty);
