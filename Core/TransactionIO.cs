@@ -45,27 +45,23 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Writes a transaction to the log when it is being executed.
         public void WriteTransactionToLog(Transaction transaction)
         {
-            try
-            {
-                string s = transaction.ToString();
-                File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
+            string s = transaction.ToString();
+            File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
 
-                // As the user's balance has also changed after a transaction, the user file is updated accordingly.
-                string[] userfile = File.ReadAllLines("..\\..\\Ressources\\user.csv");
-                for (int i = 1; i < userfile.Length; i++)
-                {
-                    userfile[i] = stringsystem.userIO.FormatUserForSave(stringsystem.users[(uint)i-1]); // -1 as the user is shifted by one compared to line number due to header line.
-                }
-
-                File.WriteAllText("..\\..\\Ressources\\user.csv", string.Empty);
-                File.WriteAllLines("..\\..\\Ressources\\user.csv", userfile);
-            }
-            catch(Exception ex)
+            // As the user's balance has also changed after a transaction, the user file is updated accordingly.
+            // This is done here instead of in UserIO to avoid creating a new instance or passing UserIO as an argument.
+            
+            string[] userfile = File.ReadAllLines("..\\..\\Ressources\\user.csv");
+            for (int i = 1; i < userfile.Length; i++)
             {
-                Console.WriteLine(ex);
+                userfile[i] = stringsystem.userIO.FormatUserForSave(stringsystem.users[(uint)i - 1]); // -1 as the user is shifted by one compared to line number due to header line.
             }
+
+            File.WriteAllText("..\\..\\Ressources\\user.csv", string.Empty);
+            File.WriteAllLines("..\\..\\Ressources\\user.csv", userfile);
         }
     }
 }

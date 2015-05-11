@@ -8,6 +8,7 @@ namespace OOP_Spring_2015
 {
     public class InsertCashTransaction : Transaction
     {
+        // Constructor used for creating a new transaction
         public InsertCashTransaction(uint id, User user, uint amount)
         {
             TransactionID = id;
@@ -16,6 +17,7 @@ namespace OOP_Spring_2015
             this.Amount = amount;
         }
 
+        // Constructor used for creating an existing transaction from log file.
         public InsertCashTransaction(uint id, User user, uint amount, string date)
         {
             TransactionID = id;
@@ -29,6 +31,7 @@ namespace OOP_Spring_2015
 
         }
 
+        // Adds the set amount to the user.
         public override void Execute()
         {
             user.AddToBalance((int)Amount);

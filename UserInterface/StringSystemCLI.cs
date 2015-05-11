@@ -38,12 +38,11 @@ namespace OOP_Spring_2015
             Console.WriteLine(String.Format("|{0,5}|{1,-35}|{2,8}|", "ID", "Product", "Price")); // <- Currently have space for all products (including inactive) but may not suffice for future products
             WriteProductSeparationLine();
 
-            foreach (var item in stringsystem.products)
+            List<Product> activeProducts = stringsystem.GetActiveProducts();
+
+            foreach (var item in activeProducts)
             {
-                if (item.Value.Active == true)
-                {
-                    WriteProductLine(item.Key);
-                }
+                WriteProductLine(item.ProductID);
             }
 
             WriteProductSeparationLine();
@@ -224,6 +223,14 @@ namespace OOP_Spring_2015
             Console.WriteLine("Add user");
             Console.WriteLine("Once called, adds a new user to the system. The order of which the users info is added is: Username, Email, last name, all first names.");
             Console.WriteLine("Rules for naming:\nUsername: characters a-z 0-9 and '_'\nName: cant be empty\nEMail: for local, it can only contain a-z A-z 0-9 '.', '_' and '-', and for domain, it can unlo contain a-z A-Z 0-9 '-' and '.'");
+        }
+
+        public void AdminDisplaySetPrice()
+        {
+            Console.WriteLine(":setprice <productID> <price>");
+            Console.WriteLine("Set price");
+            Console.WriteLine("Once called, sets a new price for the specified product.");
+            Console.WriteLine("*The program does not save the change on restart.");
         }
 
         public void AdminDisplayMan()

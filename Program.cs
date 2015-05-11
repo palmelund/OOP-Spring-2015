@@ -8,7 +8,7 @@ namespace OOP_Spring_2015
 {
     class Program
     {
-        public static void Main()
+        static void Main()
         {
             Console.OutputEncoding = Encoding.Unicode;  // <- To allow terminal to display special characters such as æøå, that is used for products
             

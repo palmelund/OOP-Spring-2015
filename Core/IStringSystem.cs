@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
+    // Interface for the methods used in StringSystem
     interface IStringSystem
     {
-        void BuyProduct(User user, Product product);
+        void BuyProduct(User user, uint productID);
         void AddCreditToAccount(User user, uint amount);
         void ExecuteTransaction(Transaction transaction);
         Product GetProduct(uint id);

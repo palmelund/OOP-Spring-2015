@@ -39,7 +39,8 @@ namespace OOP_Spring_2015
             protected set;
         }
 
-        public Product(uint productID, string name, uint price, bool active/*, bool credit*/)
+        // Constructor for loading a product into the system.
+        public Product(uint productID, string name, uint price, bool active)
         {
             ProductID = SetProductID(productID);
             Name = SetProductName(name);
@@ -53,6 +54,7 @@ namespace OOP_Spring_2015
 
         }
 
+        // Sets the product id if it isn't 0
         uint SetProductID(uint productID)
         {
             if(productID == 0)
@@ -65,6 +67,7 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Set's the product name if it isn't null or empty.
         string SetProductName(string name)
         {
             if(string.IsNullOrEmpty(name))
@@ -77,17 +80,20 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Sets the new price for the product
         public uint SetNewPrice(uint price)
         {
             Price = price;
             return Price;
         }
 
+        // Sets if the user can buy the product. If true, it is for sale.
         public void SetActive(bool active)
         {
             Active = active;
         }
 
+        // Sets if the user can buy the product with insufficient credits.
         public bool SetCanBeBoughtOnCredit(bool credit)
         {
             CanBeBoughtOnCredit = credit;

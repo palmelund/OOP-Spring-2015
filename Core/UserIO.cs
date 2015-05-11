@@ -9,6 +9,7 @@ namespace OOP_Spring_2015
 {
     public class UserIO
     {
+        // Loads all existing users into a dictionary on startup.
         public UserIO(ref Dictionary<uint, User> users)
         {
             try
@@ -31,12 +32,14 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Adds a newly created user to the userfile. It is expected that the userfile still exists if an exception wasn't thrown on startup.
         public void AddUserToFile(User user)
         {
             string savefile = FormatUserForSave(user);
             File.AppendAllText("..\\..\\Ressources\\user.csv", savefile + Environment.NewLine);
         }
 
+        // A more complete tostring version for the user containing everything that has to be saved to the file.
         public string FormatUserForSave(User user)
         {
             return user.UserID + ";" + user.Username + ";" + user.FirstName + ";" + user.LastName + ";" + user.EMail + ";" + user.Balance;

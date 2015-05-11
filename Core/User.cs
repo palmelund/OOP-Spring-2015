@@ -45,6 +45,7 @@ namespace OOP_Spring_2015
             protected set;
         }
 
+        // Constructor for creating a user. It is expected the username and id has been checked for dublicate entry before initialization.
         public User(uint userID, string firstName, string lastName, string username, string EMail)
         {
             UserID = userID;
@@ -58,6 +59,7 @@ namespace OOP_Spring_2015
 
         #region Set
 
+        // Ensures a empty name isn't saved.
         string CheckIfEmpty(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -70,9 +72,9 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Checks that the user has used legal characters for his/her username.
         string SetUsername(string username)
         {
-            // http://stackoverflow.com/questions/12350801/check-string-for-invalid-characters-smartest-way
             Regex regex = new Regex("^[a-z0-9_]+$");
 
             if (string.IsNullOrEmpty(username))
@@ -89,6 +91,7 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Checks that the user has used legal characters for his/her email
         string SetEmail(string EMail)
         {
             string[] emailcomp = EMail.Split('@');
@@ -121,16 +124,19 @@ namespace OOP_Spring_2015
 
         #region Balance
 
+        // Returns the user's balance, thought the balance can also accessed directly through the getter.
         public int Saldo()
         {
             return Balance;
         }
 
+        // Adds the specified number the the users balance. Used for InsertCashTransactions
         public void AddToBalance(int amount)
         {
             Balance += amount;
         }
 
+        // Subtracts the specified number from the users balance. A positive number is expected for subtraction.
         public void SubtractFromBalance(int amount)
         {
             Balance -= amount;
@@ -153,9 +159,10 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return FirstName + LastName + " " + EMail;
+            return FirstName + " " + LastName + " " + EMail;
         }
         
+        // Used for comparing two users to each other, by comparing their userID
         public override bool Equals(object obj)
         {
             if(obj == null)
@@ -174,11 +181,13 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Gets a hashcode for the user by returning the hascode for the users id.
         public override int GetHashCode()
         {
             return this.UserID.GetHashCode();
         }
 
+        // Compares two users, and tells who has the bigger userID
         public int CompareTo(object obj)
         {
             if (obj == null)

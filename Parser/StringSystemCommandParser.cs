@@ -39,7 +39,11 @@ namespace OOP_Spring_2015
             commandDictionary.Add(":addcredits", s => this.stringsystem.AddCreditToAccount(this.stringsystem.GetUser(s[1]), uint.Parse(s[2])));
             
             // Add new user to the system. Username is added last, but will include all first names and middle names - :adduser <username> <email> <lastname> <firstname(s)>
-            commandDictionary.Add(":adduser", s => this.stringsystem.AddUser(s[1], s[2], s[3], s));
+            commandDictionary.Add(":adduser", s => this.stringsystem.AddUser(DoesUserExist(s[1]), s[2], s[3], s));
+
+            // Sets a new price for a product - :setprice <productID> <new price>
+            // Example - :setprice 1 100
+            commandDictionary.Add(":setprice", s => stringsystem.products[uint.Parse(s[1])].SetNewPrice(uint.Parse(s[2])));
 
             // Display use information about specified command - :man <command>
             // Example - :man q
@@ -144,7 +148,7 @@ namespace OOP_Spring_2015
                 cli.DisplayInsufficientCash(ex);
             }
             // Build-In Exceptions
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
                 cli.DisplayAdminCommandNotFoundMessage(command); // <- this is the only place a dictionary should be able to get a valid key: AdminCommands.
             }
@@ -191,6 +195,19 @@ namespace OOP_Spring_2015
                 default:
                     throw new ArgumentException("Unknown command");
             }
+        }
+
+        string DoesUserExist(string username)
+        {
+            try
+            {
+                User user = stringsystem.GetUser(username);
+            }
+            catch (Exception)
+            {
+                return username;
+            }
+            throw new ArgumentException("Username already taken");
         }
     }
 }

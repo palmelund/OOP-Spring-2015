@@ -15,23 +15,14 @@ namespace OOP_Spring_2015
         public TransactionIO transactionIO;
         public UserIO userIO;
 
-        /*
-         * REMEMBER:
-         * Load order:
-         * USER
-         * PRODUCT
-         * TRANSACTION
-         */
-
+        // Loads transactions, users and products upon startup.
+        // Load order should always be: User and PRoduct before Transaction
         public StringSystem()
         {
             try
             {
                 userIO = new UserIO(ref users);
-
-                ProductsReader productsReader = new ProductsReader();
-                products = productsReader.GetProductDictionary();
-
+                ProductsReader productsReader = new ProductsReader(ref products);
                 transactionIO = new TransactionIO(this, ref transactions);
             }
             catch (Exception ex) // <- If this catches anything, the program shouldn't be run as something went wrong with loading the files, and may not work properly.
@@ -41,12 +32,13 @@ namespace OOP_Spring_2015
             }
         }
 
-        public void BuyProduct(User user, Product product)
-        {
-            BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, product);
-            ExecuteTransaction(transaction);
-        }
+        //public void BuyProduct(User user, Product product)
+        //{
+        //    BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, product);
+        //    ExecuteTransaction(transaction);
+        //}
 
+        // Called when the user buys a product, creating the transaction and executing the purchase.
         public void BuyProduct(User user, uint productID)
         {
             Product product = GetProduct(productID);
@@ -63,13 +55,22 @@ namespace OOP_Spring_2015
             ExecuteTransaction(transaction);
         }
 
+        // Adds a new user to the system with input given from the user.
         public void AddUser(string username, string email, string lastname, string[] firstname)
         {
             string fn = string.Empty;
 
+            // Adds all first names. The first 4 elements are command, username, email and lastname before all the first names.
             for(int i = 4; i < firstname.Length; i++)
             {
-                fn += firstname[i] + " ";
+                if(i < firstname.Length - 1)
+                {
+                    fn += firstname[i] + " ";
+                }
+                else
+                {
+                    fn += firstname[i]; // <- to avoid space after last firstname entry.
+                }
             }
 
             User user = new User((uint)users.Count, fn, lastname, username, email);
@@ -78,12 +79,14 @@ namespace OOP_Spring_2015
             userIO.AddUserToFile(user);
         }
 
+        // Adds the specified number of credits the the specified user.
         public void AddCreditToAccount(User user, uint amount)
         {
             InsertCashTransaction transaction = new InsertCashTransaction((uint)transactions.Count, user, amount);
             ExecuteTransaction(transaction);
         }
 
+        // Executes a given Buy- or InsertCashTransaction, transferring credits and adding the transaction the log.
         public void ExecuteTransaction(Transaction transaction)
         {
             transaction.Execute();
@@ -99,6 +102,7 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Gets the product from input id
         public Product GetProduct(uint id)
         {
             bool contains = products.ContainsKey(id);
@@ -115,6 +119,7 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Gets a user from a given username
         public User GetUser(string username)
         {
             foreach (var item in users)
@@ -129,6 +134,7 @@ namespace OOP_Spring_2015
             throw userDoesNotExistException;
         }
 
+        // Gets a list of all transactions for a given user.
         public List<Transaction> GetTransactionList(uint userID)
         {
             List<Transaction> trans = new List<Transaction>();
@@ -146,6 +152,7 @@ namespace OOP_Spring_2015
             return trans;
         }
 
+        // Gets the newest X transactions for the specified user.
         public List<BuyTransaction> GetBuyTransactionList(uint userID, int numberOfTransactions)
         {
             List<BuyTransaction> trans = new List<BuyTransaction>();
@@ -171,6 +178,7 @@ namespace OOP_Spring_2015
             return trans;
         }
 
+        // Gets a list of active products.
         public List<Product> GetActiveProducts()
         {
             List<Product> productList = new List<Product>();

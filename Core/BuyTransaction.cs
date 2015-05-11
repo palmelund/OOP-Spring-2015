@@ -20,6 +20,7 @@ namespace OOP_Spring_2015
             protected set;
         }
 
+        // Constructor used for creating a new transaction
         public BuyTransaction(uint id, User user, Product product)
         {
             TransactionID = id;
@@ -29,6 +30,7 @@ namespace OOP_Spring_2015
             Amount = product.Price;
         }
 
+        // Constructor used for creating an existing transaction from log file.
         public BuyTransaction(uint id, User user, Product product, uint amount, string date)
         {
             TransactionID = id;
@@ -43,6 +45,7 @@ namespace OOP_Spring_2015
 
         }
 
+        // Exetutes the transaction if the user has sufficient credits, otherwise an exception is thrown.
         public override void Execute()
         {
             if(user.Balance < Amount && product.CanBeBoughtOnCredit == false)
