@@ -231,7 +231,7 @@ namespace OOP_Spring_2015
         {
             try
             {
-                User user = stringsystem.GetUser(username);
+                stringsystem.GetUser(username);
             }
             catch (Exception)
             {

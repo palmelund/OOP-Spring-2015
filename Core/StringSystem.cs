@@ -21,7 +21,7 @@ namespace OOP_Spring_2015
             try
             {
                 userIO = new UserIO(ref users);
-                ProductsReader productsReader = new ProductsReader(ref products); // <- No need to keep an instance of ProductReader as new products cant be added.
+                new ProductsReader(ref products); // <- No need to keep an instance of ProductReader as new products cant be added.
                 transactionIO = new TransactionIO(this, ref transactions);
             }
             catch (Exception ex) // <- If this catches anything, the program shouldn't be run as something went wrong with loading the files, and may not work properly.

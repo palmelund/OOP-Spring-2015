@@ -63,7 +63,7 @@ namespace OOP_Spring_2015
         // Sets the time for the transaction, and ensures that it isn't null.
         protected DateTime SetDate(DateTime date)
         {
-            if (date == null)
+            if (date.Equals(null))
             {
                 throw new ArgumentNullException("Date not found");
             }
