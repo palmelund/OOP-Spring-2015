@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
+    // This exception is thrown when the specified user doesn't exist.
     public class UserDoesNotExistException : Exception
     {
         public UserDoesNotExistException()

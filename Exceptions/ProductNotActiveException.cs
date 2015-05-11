@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
+    // This exception is thrown when the user tries to buy a product that is not active.
     class ProductNotActiveException : Exception
     {
          public ProductNotActiveException()

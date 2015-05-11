@@ -13,6 +13,7 @@ namespace OOP_Spring_2015
 
         public Dictionary<string, Action<string[]>> commandDictionary = new Dictionary<string, Action<string[]>>();
 
+        // Adds all admin commands when initiated
         public StringSystemCommandParser(StringSystemCLI cli, StringSystem stringsystem)
         {
             this.cli = cli;
@@ -57,6 +58,7 @@ namespace OOP_Spring_2015
             string[] s = command.Split(' ');
             try
             {
+                // If the input starts with ":" it is treated as an admin command, otherwise it will be read as a user.
                 if (s[0].StartsWith(":"))
                 {
                     commandDictionary[s[0]].Invoke(s);
@@ -66,10 +68,12 @@ namespace OOP_Spring_2015
                     User user;
                     user = stringsystem.GetUser(s[0]);
 
+                    // If length 1, it will just print info about the user.
                     if (s.Length == 1)
                     {
                         cli.DisplayUserInfo(s[0]);
                     }
+                    // If length 2, it will búy a product for the user, assuming the product exists.
                     else if (s.Length == 2)
                     {
                         uint productID;
@@ -90,6 +94,7 @@ namespace OOP_Spring_2015
                             throw productDoesNotExistException;
                         }
                     }
+                    // If length 3, it will buy a number of products for the user, assuming the number is legal and the product exists.
                     else if (s.Length == 3)
                     {
                         uint productID;
@@ -122,6 +127,7 @@ namespace OOP_Spring_2015
                             }
                         }
                     }
+                    // Should the user add more arguments, the system throws an exception, in stead of guessing what the user wants.
                     else
                     {
                         throw new ArgumentException("Too many arguments");
@@ -163,6 +169,7 @@ namespace OOP_Spring_2015
             // No final, as the program returns to get new input here.
         }
 
+        // Switch statement for man pages, deciding what message to show for the user.
         void DisplayManPages(string command)
         {
             switch(command)
@@ -197,6 +204,7 @@ namespace OOP_Spring_2015
             }
         }
 
+        // Checks if the user exists when creating a new user, avoiding dublicates.
         string DoesUserExist(string username)
         {
             try

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace OOP_Spring_2015
 {
+    // Responsible for all output to the user.
     public class StringSystemCLI : IStringSystemUI
     {
         StringSystem stringsystem;
 
+        // Adds the stringsystem, allowing all methods to use it's content.
         public StringSystemCLI(StringSystem stringsystem)
         {
             this.stringsystem = stringsystem;
@@ -48,17 +50,20 @@ namespace OOP_Spring_2015
             WriteProductSeparationLine();
         }
 
+        // Writes product info that will be displayed to the user in formatted manners.
         void WriteProductLine(uint id)
         {
             Console.WriteLine(String.Format("|{0,5}|{1,-35}|{2,8:N2}|", stringsystem.products[id].ProductID, stringsystem.products[id].Name, ((double)stringsystem.products[id].Price) / 100));
         }
 
+        // Draws the separation line
         void WriteProductSeparationLine()
         {
             Console.WriteLine("|=====|===================================|========|");
         }
 
         //=== INTERFACE IMPLEMENTATION ===//
+        // A
 
         public void DisplayUserNotFound(Exception ex)
         {
@@ -93,12 +98,12 @@ namespace OOP_Spring_2015
                         Console.WriteLine("\nLatest [" + buyTransactions.Count + "] transactions:");
 
                         Console.WriteLine("|{0,5}|{1,-35}|{2,8}|{3, -25}|", "ID", "Product", "Price", "Date");
-                        Console.WriteLine("|=====|===================================|========|=========================|");
+                        DisplayUserInfoSeperationLine();
                         foreach (var t in buyTransactions)
                         {
                             Console.WriteLine("|{0,5}|{1,-35}|{2,8:N2}|{3, -25}|", t.TransactionID, t.product.Name, (double)t.Amount / 100, t.date);
                         }
-                        Console.WriteLine("|=====|===================================|========|=========================|");
+                        DisplayUserInfoSeperationLine();
                     }
                     else
                     {
@@ -112,6 +117,11 @@ namespace OOP_Spring_2015
                     return;
                 }
             }
+        }
+
+        void DisplayUserInfoSeperationLine()
+        {
+            Console.WriteLine("|=====|===================================|========|=========================|");
         }
 
         public void DisplayLowBalance(User user)
@@ -169,7 +179,7 @@ namespace OOP_Spring_2015
             Console.Clear();
         }
 
-        // Display manpages
+        // Display man pages
 
         public void AdmDisplayQuit()
         {
