@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.IO;
 
 namespace OOP_Spring_2015
@@ -19,7 +18,7 @@ namespace OOP_Spring_2015
             {
                 this.stringsystem = stringsystem;
 
-                string[] transactionList = File.ReadAllLines("..\\..\\Ressources\\transactions.log");
+                string[] transactionList = File.ReadAllLines("../../Ressources/transactions.log");
                 foreach (var item in transactionList)
                 {
                     string[] transaction = item.Split(';');
@@ -49,19 +48,19 @@ namespace OOP_Spring_2015
         public void WriteTransactionToLog(Transaction transaction)
         {
             string s = transaction.ToString();
-            File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
+            File.AppendAllText("../../Ressources/transactions.log", s + Environment.NewLine);
 
             // As the user's balance has also changed after a transaction, the user file is updated accordingly.
             // This is done here instead of in UserIO to avoid creating a new instance or passing UserIO as an argument.
             
-            string[] userfile = File.ReadAllLines("..\\..\\Ressources\\user.csv");
+            string[] userfile = File.ReadAllLines("../../Ressources/user.csv");
             for (int i = 1; i < userfile.Length; i++)
             {
                 userfile[i] = stringsystem.userIO.FormatUserForSave(stringsystem.users[(uint)i - 1]); // -1 as the user is shifted by one compared to line number due to header line.
             }
 
-            File.WriteAllText("..\\..\\Ressources\\user.csv", string.Empty);
-            File.WriteAllLines("..\\..\\Ressources\\user.csv", userfile);
+            File.WriteAllText("../../Ressources/user.csv", string.Empty);
+            File.WriteAllLines("../../Ressources/user.csv", userfile);
         }
     }
 }

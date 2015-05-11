@@ -12,14 +12,16 @@ namespace OOP_Spring_2015
         // Because it's the cli's job to display the exception to the user
         void DisplayUserNotFound(Exception ex);
         void DisplayProductNotFound(Exception ex);
+        void DisplayProductNotActive(Exception ex);
         
         void DisplayUserInfo(string username);
+        void DisplayLowBalance(User user);
         void DisplayTooManyArgumentsError(string arg);
         void DisplayAdminCommandNotFoundMessage(string arg);
         void DisplayUserBuysProduct(uint productID);
-        void DisplayUserBuysProduct(Transaction transaction, uint count);
         void Close();
         void DisplayInsufficientCash(Exception ex);
+        void DisplayCriticalError(Exception ex); // <- This shouldn't be called
         void DisplayGeneralError(string errorString);
     }
 }

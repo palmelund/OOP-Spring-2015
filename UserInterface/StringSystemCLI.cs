@@ -145,11 +145,6 @@ namespace OOP_Spring_2015
             Console.WriteLine("Bought product [{0}]:\n{1}", productID, stringsystem.GetProduct(productID));
         }
 
-        public void DisplayUserBuysProduct(Transaction transaction, uint count)
-        {
-                Console.WriteLine("Completed " + count + " transactions:\n" + transaction);
-        }
-
         public void Close()
         {
             System.Environment.Exit(0); // <- the program is closed with exit code 0;

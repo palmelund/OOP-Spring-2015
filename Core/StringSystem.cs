@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace OOP_Spring_2015
 {
@@ -22,7 +21,7 @@ namespace OOP_Spring_2015
             try
             {
                 userIO = new UserIO(ref users);
-                ProductsReader productsReader = new ProductsReader(ref products);
+                ProductsReader productsReader = new ProductsReader(ref products); // <- No need to keep an instance of ProductReader as new products cant be added.
                 transactionIO = new TransactionIO(this, ref transactions);
             }
             catch (Exception ex) // <- If this catches anything, the program shouldn't be run as something went wrong with loading the files, and may not work properly.
@@ -31,12 +30,6 @@ namespace OOP_Spring_2015
                 cli.DisplayCriticalError(ex);
             }
         }
-
-        //public void BuyProduct(User user, Product product)
-        //{
-        //    BuyTransaction transaction = new BuyTransaction((uint) transactions.Count, user, product);
-        //    ExecuteTransaction(transaction);
-        //}
 
         // Called when the user buys a product, creating the transaction and executing the purchase.
         public void BuyProduct(User user, uint productID)

@@ -14,7 +14,7 @@ namespace OOP_Spring_2015
         {
             try
             {
-                string[] userlist = File.ReadAllLines("..\\..\\Ressources\\user.csv");
+                string[] userlist = File.ReadAllLines("../../Ressources/user.csv");
                 int stringlength = userlist.Length;
 
                 for (int i = 1; i < stringlength; i++)
@@ -36,7 +36,7 @@ namespace OOP_Spring_2015
         public void AddUserToFile(User user)
         {
             string savefile = FormatUserForSave(user);
-            File.AppendAllText("..\\..\\Ressources\\user.csv", savefile + Environment.NewLine);
+            File.AppendAllText("../../Ressources/user.csv", savefile + Environment.NewLine);
         }
 
         // A more complete tostring version for the user containing everything that has to be saved to the file.

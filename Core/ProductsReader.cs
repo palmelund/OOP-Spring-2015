@@ -15,7 +15,7 @@ namespace OOP_Spring_2015
         {
             try
             {
-                string[] productsString = File.ReadAllLines("..\\..\\Ressources\\products.csv", Encoding.UTF7);
+                string[] productsString = File.ReadAllLines("../../Ressources/products.csv", Encoding.UTF7);
                 int stringLength = productsString.Length;
                 for (int i = 1; i < stringLength; i++) // <- start at 1 as first line isn't for sale.
                 {
