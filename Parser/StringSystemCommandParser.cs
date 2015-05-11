@@ -109,21 +109,39 @@ namespace OOP_Spring_2015
                             productDoesNotExistException.Data["product"] = productID;
                             throw productDoesNotExistException;
                         }
-                        else if(isValidNumber == false)
+                        else if(isValidNumber == false || numberOfProducts < 1)
                         {
-                            ArgumentOutOfRangeException argumentOutOfRangeExcaption = new ArgumentOutOfRangeException("The number of products requested can not be fulfilled as it is not valid.");
-                            throw argumentOutOfRangeExcaption;
+                            throw new ArgumentOutOfRangeException("The number of products requested can not be fulfilled as it is not valid.");
                         }
                         else
                         {
-                            for (int i = 0; i < numberOfProducts; i++)
+                            // Ensure that the user can afford the purchase, otherwise let the user know why they cant afford it, and how many they can.
+                            uint totalprice = numberOfProducts * stringsystem.products[productID].Price;
+
+                            if(totalprice <= user.Balance)
                             {
-                                stringsystem.BuyProduct(user, productID);
-                                cli.DisplayUserBuysProduct(productID);
-                                if (user.CheckLowSaldo())
+                                for (int i = 0; i < numberOfProducts; i++)
                                 {
-                                    cli.DisplayLowBalance(user);
+                                    stringsystem.BuyProduct(user, productID);
+                                    cli.DisplayUserBuysProduct(productID);
+                                    if (user.CheckLowSaldo())
+                                    {
+                                        cli.DisplayLowBalance(user);
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                uint affordableAmount = 0;
+                                uint affordabletotalprice = 0;
+                                uint pieceprice = stringsystem.products[productID].Price;
+                                while(affordabletotalprice < user.Balance - pieceprice)
+                                {
+                                    affordabletotalprice += pieceprice;
+                                    affordableAmount++;
+                                }
+
+                                cli.DisplayInsufficientCashMultibuy(productID, totalprice, numberOfProducts, affordableAmount);
                             }
                         }
                     }
@@ -139,19 +157,19 @@ namespace OOP_Spring_2015
             // has to bee shown to the user.
             catch(UserDoesNotExistException ex)
             {
-                cli.DisplayUserNotFound(ex);
+                cli.DisplayUserNotFound(ex.Message, ex.Data["user"].ToString());
             }
             catch(ProductDoesNotExistException ex)
             {
-                cli.DisplayProductNotFound(ex);
+                cli.DisplayProductNotFound(ex.Message, uint.Parse(ex.Data["product"].ToString()));
             }
             catch(ProductNotActiveException ex)
             {
-                cli.DisplayProductNotActive(ex);
+                cli.DisplayProductNotActive(ex.Message, uint.Parse(ex.Data["id"].ToString()), ex.Data["product"].ToString());
             }
             catch(InsufficientCreditsException ex)
             {
-                cli.DisplayInsufficientCash(ex);
+                cli.DisplayInsufficientCash(ex.Data["user"].ToString(), ex.Data["product"].ToString());
             }
             // Build-In Exceptions
             catch (KeyNotFoundException)
@@ -160,7 +178,11 @@ namespace OOP_Spring_2015
             }
             catch (ArgumentNullException ex)
             {
-                cli.DisplayGeneralError(ex.Message);
+                cli.DisplayArgumentNullException(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                cli.DisplayArgumentException(ex.Message);
             }
             catch (Exception ex)
             {
@@ -204,7 +226,7 @@ namespace OOP_Spring_2015
             }
         }
 
-        // Checks if the user exists when creating a new user, avoiding dublicates.
+        // Checks if the user exists when creating a new user, avoiding dublicate usernames.
         string DoesUserExist(string username)
         {
             try

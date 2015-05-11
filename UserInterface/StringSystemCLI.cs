@@ -65,19 +65,19 @@ namespace OOP_Spring_2015
         //=== INTERFACE IMPLEMENTATION ===//
         // A
 
-        public void DisplayUserNotFound(Exception ex)
+        public void DisplayUserNotFound(string errorMessage, string username)
         {
-            Console.WriteLine("{0}: {1}", ex.Message, ex.Data["user"]);
+            Console.WriteLine("{0}: {1}", errorMessage, username);
         }
 
-        public void DisplayProductNotFound(Exception ex)
+        public void DisplayProductNotFound(string errorMessage, uint productID)
         {
-            Console.WriteLine("{0}: {1}", ex.Message, ex.Data["product"]);
+            Console.WriteLine("{0}: {1}", errorMessage, productID);
         }
 
-        public void DisplayProductNotActive(Exception ex)
+        public void DisplayProductNotActive(string errorMessage, uint productID, string product)
         {
-            Console.WriteLine("{0}: {1} - {2}", ex.Message, ex.Data["id"], ex.Data["product"]);
+            Console.WriteLine("{0}: {1} - {2}", errorMessage, productID, product);
         }
 
         // Displays user info
@@ -89,7 +89,7 @@ namespace OOP_Spring_2015
                 if(item.Value.Username.Equals(username))
                 {
                     User user = item.Value;
-                    Console.WriteLine("Username: " + user.Username + "\nIRL Name: " + user.FirstName  + user.LastName + "\nBalance: " + user.Balance);
+                    Console.WriteLine("Username: {0}\nIRL Name: {1} {2}\nBalance: {3:N2}",user.Username, user.FirstName, user.LastName, (double)user.Balance/100);
 
                     List<BuyTransaction> buyTransactions = stringsystem.GetBuyTransactionList(user.UserID, 10);
 
@@ -152,9 +152,19 @@ namespace OOP_Spring_2015
                                         // Close() while the system is doing so.
         }
 
-        public void DisplayInsufficientCash(Exception ex)
+        public void DisplayInsufficientCash(string user, string product)
         {
-            Console.WriteLine("User [{0}] does not sufficient funds to complete transaction for product \"{1}\"", ex.Data["user"], ex.Data["product"]);
+            Console.WriteLine("User [{0}] does not sufficient funds to complete transaction for product \"{1}\"", user, product);
+        }
+
+        public void DisplayInsufficientCashMultibuy(uint productID, uint totalprice, uint amount, uint affordableAmount)
+        {
+            Console.WriteLine("You can't afford to purchase \"{0}\" {1} times. The total price is {2:N2}, but you can only afford to buy the product {3} times.", stringsystem.GetProduct(productID).Name, amount, (double)totalprice/100, affordableAmount);
+        }
+
+        public void DisplayArgumentException(string errorstring)
+        {
+            Console.WriteLine("Argumenterror: " + errorstring);
         }
 
         public void DisplayGeneralError(string errorString)
@@ -162,9 +172,14 @@ namespace OOP_Spring_2015
             Console.WriteLine("An error occoured: " + errorString);
         }
 
-        public void DisplayCriticalError(Exception ex)
+        public void DisplayArgumentNullException(string errorString)
         {
-            Console.WriteLine("Critical Error: {0}", ex.Message);
+            Console.WriteLine("Null exception: " + errorString);
+        }
+
+        public void DisplayCriticalError(string criticalErrorMessage)
+        {
+            Console.WriteLine("Critical Error: {0}", criticalErrorMessage);
             Console.WriteLine("Press <ESC> to stop the program or any other key to continue: ");
             ConsoleKeyInfo key = Console.ReadKey();
             if(key.Key.Equals(ConsoleKey.Escape))

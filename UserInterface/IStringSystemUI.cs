@@ -8,11 +8,9 @@ namespace OOP_Spring_2015
 {
     public interface IStringSystemUI
     {
-        //TODO: ADD NEW METHODS TO INTERFACE
-        // Because it's the cli's job to display the exception to the user
-        void DisplayUserNotFound(Exception ex);
-        void DisplayProductNotFound(Exception ex);
-        void DisplayProductNotActive(Exception ex);
+        void DisplayUserNotFound(string errorMessage, string username);
+        void DisplayProductNotFound(string errorMessage, uint productID);
+        void DisplayProductNotActive(string errorMessage, uint productID, string product);
         
         void DisplayUserInfo(string username);
         void DisplayLowBalance(User user);
@@ -20,8 +18,10 @@ namespace OOP_Spring_2015
         void DisplayAdminCommandNotFoundMessage(string arg);
         void DisplayUserBuysProduct(uint productID);
         void Close();
-        void DisplayInsufficientCash(Exception ex);
-        void DisplayCriticalError(Exception ex); // <- This shouldn't be called
+        void DisplayInsufficientCash(string user, string product);
+        void DisplayCriticalError(string criticalErrorMessage); // <- This shouldn't be called unless something really bad happens.
         void DisplayGeneralError(string errorString);
+        void DisplayArgumentException(string errorString);
+        void DisplayArgumentNullException(string errorString);
     }
 }

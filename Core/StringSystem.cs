@@ -27,7 +27,7 @@ namespace OOP_Spring_2015
             catch (Exception ex) // <- If this catches anything, the program shouldn't be run as something went wrong with loading the files, and may not work properly.
             {
                 StringSystemCLI cli = new StringSystemCLI(this);
-                cli.DisplayCriticalError(ex);
+                cli.DisplayCriticalError(ex.Message);
             }
         }
 

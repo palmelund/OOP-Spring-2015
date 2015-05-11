@@ -9,6 +9,7 @@ namespace OOP_Spring_2015
 {
     public class User : IComparable
     {
+        
         public uint UserID
         {
             get;
@@ -56,8 +57,6 @@ namespace OOP_Spring_2015
             Balance = 0;
 
         }
-
-        #region Set
 
         // Ensures a empty name isn't saved.
         string CheckIfEmpty(string name)
@@ -120,10 +119,6 @@ namespace OOP_Spring_2015
             }
         }
 
-        #endregion
-
-        #region Balance
-
         // Returns the user's balance, thought the balance can also accessed directly through the getter.
         public int Saldo()
         {
@@ -143,9 +138,11 @@ namespace OOP_Spring_2015
         }
 
         // Returns true if the user has low saldo and needs to be warned about it.
+        const int WarningBalance = 5000;
+        
         public bool CheckLowSaldo()
         {
-            if(Balance < 5000)
+            if (Balance < WarningBalance)
             {
                 return true;
             }
@@ -154,8 +151,6 @@ namespace OOP_Spring_2015
                 return false; 
             }
         }
-
-        #endregion
 
         public override string ToString()
         {

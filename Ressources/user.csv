@@ -1,6 +1,5 @@
 id;username;firstname;lastname;email;balance
-0;thepalmelund;frederik palmelund ;voldby;frederik.palmelund@gmail.com;5900
-1;test;tester testa t. ;test;test@test.t;8501
-2;student;student ;generic;student@student.aau.dk;0
-3;me;me me ;me;me@me.me;0
-4;smart;smart smarter ;smart;smart@smartass.org;0
+0;student1;student s.;student;student1@student.aau.dk;0
+1;nerd;nerdy;geek;smart@aau.dk;0
+2;richy;super filty rich;fancypants;money@riches.mydomain;97400
+3;fvoldb14;Frederik Palmelund;Voldby;fvoldb14@student.aau.dk;8800
