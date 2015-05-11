@@ -60,7 +60,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "Purchase:: ID: " + TransactionID + " user: " + user + " Product: \"" + product.Name + "\" amount: " + Amount + " date: " + date;
+            return "BuyTransaction;" + TransactionID + ";" + user.Username + ";" + product.ProductID + ";" + Amount + ";" + date;
         }
     }
 }

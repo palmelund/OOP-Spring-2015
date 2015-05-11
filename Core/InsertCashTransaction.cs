@@ -36,7 +36,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "Insert Transaction:: ID: " + TransactionID + " Amount: " + Amount + " user: " + user + " Date: " + date;
+            return "InsertCashTransaction;" + TransactionID + ";" + user.Username + ";" + Amount + ";" + date;
         }
     }
 }

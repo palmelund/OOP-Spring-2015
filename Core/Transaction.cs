@@ -77,7 +77,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "ID: " + TransactionID + " Amount: " + Amount + " Date: " + date;
+            return TransactionID + ";" + Amount + ";" + date;
         }
 
         public virtual void Execute()

@@ -89,20 +89,35 @@ namespace OOP_Spring_2015
 
                     List<BuyTransaction> buyTransactions = stringsystem.GetBuyTransactionList(user.UserID, 10);
 
-                    Console.WriteLine("\nLatest [" + buyTransactions.Count + "] transactions:");
-
-                    foreach (var t in buyTransactions)
+                    if(buyTransactions.Count > 0)
                     {
-                        Console.WriteLine(t);
+                        Console.WriteLine("\nLatest [" + buyTransactions.Count + "] transactions:");
+
+                        Console.WriteLine("|{0,5}|{1,-35}|{2,8}|{3, -25}|", "ID", "Product", "Price", "Date");
+                        Console.WriteLine("|=====|===================================|========|=========================|");
+                        foreach (var t in buyTransactions)
+                        {
+                            Console.WriteLine("|{0,5}|{1,-35}|{2,8:N2}|{3, -25}|", t.TransactionID, t.product.Name, (double)t.Amount / 100, t.date);
+                        }
+                        Console.WriteLine("|=====|===================================|========|=========================|");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No transactions yet... Why dont you buy something?");
                     }
 
-                    if(user.Balance < 5000)
+                    if(user.CheckLowSaldo())
                     {
-                        Console.WriteLine("\n!!!WARNING!!! LOW BALANCE !!! CURRENTLY: {0,5:N2} !!!", ((double)user.Balance)/100);
+                        DisplayLowBalance(user);
                     }
                     return;
                 }
             }
+        }
+
+        public void DisplayLowBalance(User user)
+        {
+            Console.WriteLine("\nWARNING --- LOW BALANCE --- CURRENTLY: {0,5:N2}", ((double)user.Balance) / 100);
         }
 
         public void DisplayTooManyArgumentsError(string arg)
@@ -153,6 +168,69 @@ namespace OOP_Spring_2015
                 Environment.Exit(1);
             }
             Console.Clear();
+        }
+
+        // Display manpages
+
+        public void AdmDisplayQuit()
+        {
+            Console.WriteLine(":quit & :q");
+            Console.WriteLine("Quit application");
+            Console.WriteLine("Once called, the program will quit without further notice. As the program has already saved any transactions and users there might be, no data is lost in the proces.");
+        }
+
+        public void AdminDisplayActivate()
+        {
+            Console.WriteLine(":activate <productID>");
+            Console.WriteLine("Activate product");
+            Console.WriteLine("Once called, the program will activate the specified product (assuming that it exists), allowing the user to buy the product.");
+            Console.WriteLine("*The program does not save the change on restart.");
+        }
+
+        public void AdminDisplayDeactivate()
+        {
+            Console.WriteLine(":deactivate <productID>");
+            Console.WriteLine("Deactivate product");
+            Console.WriteLine("Once called, the program will deactivate the specified product (assuming that it exists), preventing the user from buying it.");
+            Console.WriteLine("*The program does not save the change on restart.");
+        }
+
+        public void AdminDisplayCreditsON()
+        {
+            Console.WriteLine(":crediton <productID>");
+            Console.WriteLine("Allow credit");
+            Console.WriteLine("Once called, the program will enable credit for the specified product (assuming that it exists), allowing the user to buy the product even if they dont have sufficient credits on their account.");
+            Console.WriteLine("*The program does not save the change on restart.");
+        }
+
+        public void AdminDisplayCreditsOff()
+        {
+            Console.WriteLine(":creditoff <productID>");
+            Console.WriteLine("Disallow credit");
+            Console.WriteLine("Once called, the program will disable credit for the specified producy (assuming that it exits), disallowing the user from buying the product unless they have sufficient credits.");
+            Console.WriteLine("*The program does not save the change on restart.");
+        }
+
+        public void AdminDisplayAddCredits()
+        {
+            Console.WriteLine(":addcredits <username> <amount>");
+            Console.WriteLine("Add credits to user");
+            Console.WriteLine("Once called, the program will add the specified amount to the user (assuming that the user exists)");
+        }
+
+        public void AdminDisplayAddUser()
+        {
+            Console.WriteLine(":adduser <username> <local>@<domain> <last name> <first name>[]");
+            Console.WriteLine("Add user");
+            Console.WriteLine("Once called, adds a new user to the system. The order of which the users info is added is: Username, Email, last name, all first names.");
+            Console.WriteLine("Rules for naming:\nUsername: characters a-z 0-9 and '_'\nName: cant be empty\nEMail: for local, it can only contain a-z A-z 0-9 '.', '_' and '-', and for domain, it can unlo contain a-z A-Z 0-9 '-' and '.'");
+        }
+
+        public void AdminDisplayMan()
+        {
+            Console.WriteLine(":man <command>");
+            Console.WriteLine("Manpages");
+            Console.WriteLine("Displays relevant information about the specified command, and what parameters that it takes.");
         }
     }
 }

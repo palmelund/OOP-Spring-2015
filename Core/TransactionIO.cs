@@ -49,19 +49,8 @@ namespace OOP_Spring_2015
         {
             try
             {
-                // Saves info about the transaction base on what transaction that is being saved.
-                if (transaction is BuyTransaction)
-                {
-                    BuyTransaction buyTransaction = transaction as BuyTransaction;
-                    string s = "BuyTransaction;" + buyTransaction.TransactionID + ";" + buyTransaction.user.Username + ";" + buyTransaction.product.ProductID + ";" + buyTransaction.Amount + ";" + buyTransaction.date;
-                    File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
-                }
-                else if (transaction is InsertCashTransaction)
-                {
-                    InsertCashTransaction insertcashtransaction = transaction as InsertCashTransaction;
-                    string s = "InsertCashTransaction;" + insertcashtransaction.TransactionID + ";" + insertcashtransaction.user.Username + ";" + insertcashtransaction.Amount + ";" + insertcashtransaction.date;
-                    File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
-                }
+                string s = transaction.ToString();
+                File.AppendAllText("..\\..\\Ressources\\transactions.log", s + Environment.NewLine);
 
                 // As the user's balance has also changed after a transaction, the user file is updated accordingly.
                 string[] userfile = File.ReadAllLines("..\\..\\Ressources\\user.csv");

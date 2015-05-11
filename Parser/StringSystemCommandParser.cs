@@ -40,6 +40,10 @@ namespace OOP_Spring_2015
             
             // Add new user to the system. Username is added last, but will include all first names and middle names - :adduser <username> <email> <lastname> <firstname(s)>
             commandDictionary.Add(":adduser", s => this.stringsystem.AddUser(s[1], s[2], s[3], s));
+
+            // Display use information about specified command - :man <command>
+            // Example - :man q
+            commandDictionary.Add(":man", s => DisplayManPages(s[1]));
         }
 
         // Since ParseCommand is responsible for all user input, it will also be responsible for handling all errors
@@ -70,6 +74,10 @@ namespace OOP_Spring_2015
                         {
                             stringsystem.BuyProduct(user, productID);
                             cli.DisplayUserBuysProduct(productID);
+                            if (user.CheckLowSaldo())
+                            {
+                                cli.DisplayLowBalance(user);
+                            }
                         }
                         else
                         {
@@ -103,6 +111,10 @@ namespace OOP_Spring_2015
                             {
                                 stringsystem.BuyProduct(user, productID);
                                 cli.DisplayUserBuysProduct(productID);
+                                if (user.CheckLowSaldo())
+                                {
+                                    cli.DisplayLowBalance(user);
+                                }
                             }
                         }
                     }
@@ -145,6 +157,40 @@ namespace OOP_Spring_2015
                 cli.DisplayGeneralError(ex.Message);
             }
             // No final, as the program returns to get new input here.
+        }
+
+        void DisplayManPages(string command)
+        {
+            switch(command)
+            {
+                case "q":
+                case "quit":
+                    cli.AdmDisplayQuit();
+                    break;
+                case "activate":
+                    cli.AdminDisplayActivate();
+                    break;
+                case "deactivate":
+                    cli.AdminDisplayDeactivate();
+                    break;
+                case "crediton":
+                    cli.AdminDisplayCreditsON();
+                    break;
+                case "creditoff":
+                    cli.AdminDisplayCreditsOff();
+                    break;
+                case "addcredits":
+                    cli.AdminDisplayAddCredits();
+                    break;
+                case "adduser":
+                    cli.AdminDisplayAddUser();
+                    break;
+                case "man":
+                    cli.AdminDisplayMan();
+                    break;
+                default:
+                    throw new ArgumentException("Unknown command");
+            }
         }
     }
 }

@@ -96,7 +96,7 @@ namespace OOP_Spring_2015
 
         public override string ToString()
         {
-            return "ID: " + ProductID + " Name: " + Name + " Price: " + Price + " Active: " + Active;
+            return "ID: " + ProductID + " Name: " + Name + " Price: " + Price;
         }
     }
 }

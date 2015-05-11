@@ -133,7 +133,20 @@ namespace OOP_Spring_2015
 
         public void SubtractFromBalance(int amount)
         {
-            Balance -= Math.Abs(amount);
+            Balance -= amount;
+        }
+
+        // Returns true if the user has low saldo and needs to be warned about it.
+        public bool CheckLowSaldo()
+        {
+            if(Balance < 5000)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
+            }
         }
 
         #endregion
