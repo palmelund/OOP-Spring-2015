@@ -4,3 +4,11 @@ id;username;firstname;lastname;email;balance
 2;richy;super filty rich;fancypants;money@riches.mydomain;97400
 3;fvoldb14;Frederik Palmelund;Voldby;fvoldb14@student.aau.dk;8800
 4;richy2;r;r;r@r.r;0
+5;abc_123;abc123;abc123;abc123@abc123.abc123;0
+6;abc12345;123;abc;abc123.-_@abc123.abc123;0
+7;abc12346;123;abc;abc123-_@abc123.abc123;0
+8;abc12347;123;abc;abc123_@abc123.abc123;0
+9;abc12348;123;abc;abc123.@abc123.abc123;0
+10;abcdef;123;abc;abc@def.ijk;0
+11;order;first;last;order@someorder.ord;0
+12;tester;test testa t.;tester;test@testmail.t;8400

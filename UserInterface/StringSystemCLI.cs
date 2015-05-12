@@ -226,7 +226,7 @@ namespace OOP_Spring_2015
         {
             Console.WriteLine(":creditoff <productID>");
             Console.WriteLine("Disallow credit");
-            Console.WriteLine("Once called, the program will disable credit for the specified producy (assuming that it exits), disallowing the user from buying the product unless they have sufficient credits.");
+            Console.WriteLine("Once called, the program will disable credit for the specified producy (assuming that it exists), disallowing the user from buying the product unless they have sufficient credits.");
             Console.WriteLine("*The program does not save the change on restart.");
         }
 
@@ -242,7 +242,7 @@ namespace OOP_Spring_2015
             Console.WriteLine(":adduser <username> <local>@<domain> <last name> <first name>[]");
             Console.WriteLine("Add user");
             Console.WriteLine("Once called, adds a new user to the system. The order of which the users info is added is: Username, Email, last name, all first names.");
-            Console.WriteLine("Rules for naming:\nUsername: characters a-z 0-9 and '_'\nName: cant be empty\nEMail: for local, it can only contain a-z A-z 0-9 '.', '_' and '-', and for domain, it can unlo contain a-z A-Z 0-9 '-' and '.'");
+            Console.WriteLine("Rules for naming:\nUsername: characters a-z 0-9 and '_'\nName: cant be empty\nEMail: for local, it can only contain a-z A-z 0-9 '.', '_' and '-', and for domain, it can unlo contain a-z A-Z 0-9 '-' and '.'. The domain is also not allowed to start with or end with '.' amd '-', and must contain at least one '.'");
         }
 
         public void AdminDisplaySetPrice()

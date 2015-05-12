@@ -94,8 +94,8 @@ namespace OOP_Spring_2015
         string SetEmail(string EMail)
         {
             string[] emailcomp = EMail.Split('@');
-            Regex localRegex = new Regex("^[A-Za-z0-9\\.-_]+$");
-            Regex domainRegex = new Regex("^[A-Za-z0-9\\.-]+$");
+            Regex localRegex = new Regex("^[A-Za-z0-9._-]+$");
+            Regex domainRegex = new Regex("^[A-Za-z0-9.-]+$");
             if (emailcomp.Length == 2 && !string.IsNullOrEmpty(emailcomp[0]) && !string.IsNullOrEmpty(emailcomp[1]))
             {
                 if (!localRegex.IsMatch(emailcomp[0])
@@ -106,7 +106,7 @@ namespace OOP_Spring_2015
                     || emailcomp[1].EndsWith("-")
                     || !emailcomp[1].Contains("."))
                 {
-                    throw new ArgumentException("Invalid EMail"); // Tell user EMail is invalid
+                    throw new ArgumentException("Invalid EMail. See \":man adduser\" for more info"); // Tell user EMail is invalid
                 }
                 else
                 {
@@ -115,7 +115,7 @@ namespace OOP_Spring_2015
             }
             else
             {
-                throw new ArgumentException("Invalid EMail"); // Tell user Email is invalid
+                throw new ArgumentException("Invalid EMail, must follow <local@domain>"); // Tell user Email is invalid
             }
         }
 
