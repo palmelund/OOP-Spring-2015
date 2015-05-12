@@ -27,9 +27,12 @@ namespace OOP_Spring_2015
                 WriteActiveProducts();
                 Console.Write(">> ");
                 input = Console.ReadLine();
-                parser.ParseCommand(input);
-                Console.WriteLine("Press any key to clear screen and promt for new input:");
-                Console.ReadKey();
+                if(!string.IsNullOrEmpty(input)) // <- makes sure that nothing happens when the user just presses <enter>, otherwise it would complain about user not found.
+                {
+                    parser.ParseCommand(input);
+                    Console.WriteLine("Press any key to clear screen and promt for new input:");
+                    Console.ReadKey();
+                }
                 Console.Clear(); // <- in place so other users dont scroll through use history
             }
         }
