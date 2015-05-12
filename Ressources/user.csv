@@ -1,7 +1,7 @@
 id;username;firstname;lastname;email;balance
 0;student1;student s.;student;student1@student.aau.dk;0
 1;nerd;nerdy;geek;smart@aau.dk;0
-2;richy;super filty rich;fancypants;money@riches.mydomain;97400
+2;richy;super filty rich;fancypants;money@riches.mydomain;93800
 3;fvoldb14;Frederik Palmelund;Voldby;fvoldb14@student.aau.dk;8800
 4;richy2;r;r;r@r.r;0
 5;abc_123;abc123;abc123;abc123@abc123.abc123;0
@@ -12,3 +12,5 @@ id;username;firstname;lastname;email;balance
 10;abcdef;123;abc;abc@def.ijk;0
 11;order;first;last;order@someorder.ord;0
 12;tester;test testa t.;tester;test@testmail.t;8400
+13;me;its;me;me@myself.me;95873700
+14;null;null;null;null@null.null;996100

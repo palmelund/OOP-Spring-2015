@@ -9,7 +9,7 @@ namespace OOP_Spring_2015
     public interface IStringSystemUI
     {
         void DisplayUserNotFound(string errorMessage, string username);
-        void DisplayProductNotFound(string errorMessage, uint productID);
+        void DisplayProductNotFound(uint productID);
         void DisplayProductNotActive(string errorMessage, uint productID, string product);
         
         void DisplayUserInfo(string username);

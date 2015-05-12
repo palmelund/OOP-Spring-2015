@@ -89,9 +89,7 @@ namespace OOP_Spring_2015
                         }
                         else
                         {
-                            ProductDoesNotExistException productDoesNotExistException = new ProductDoesNotExistException("The product does not exist");
-                            productDoesNotExistException.Data["product"] = productID;
-                            throw productDoesNotExistException;
+                            cli.DisplayProductNotFound(productID);
                         }
                     }
                     // If length 3, it will buy a number of products for the user, assuming the number is legal and the product exists.
@@ -102,16 +100,15 @@ namespace OOP_Spring_2015
 
                         bool isIDNumber = uint.TryParse(s[2], out productID);
                         bool isValidNumber = uint.TryParse(s[1], out numberOfProducts);
+                        stringsystem.GetProduct(productID); // <- this is here to check if product exists, and throw a ProductNotFoundException, as it would otherwise result in a KeyNotFoundException, that is only expected to happen when using an invalid AdminCommand.
 
                         if(isIDNumber == false)
                         {
-                            ProductDoesNotExistException productDoesNotExistException = new ProductDoesNotExistException("The product does not exist");
-                            productDoesNotExistException.Data["product"] = productID;
-                            throw productDoesNotExistException;
+                            cli.DisplayProductNotFound(productID);
                         }
                         else if(isValidNumber == false || numberOfProducts < 1)
                         {
-                            throw new ArgumentOutOfRangeException("The number of products requested can not be fulfilled as it is not valid.");
+                            cli.DisplayArgumentException("Cant complete transaction as the specified number isn't allowed: " + numberOfProducts);
                         }
                         else
                         {
@@ -148,20 +145,20 @@ namespace OOP_Spring_2015
                     // Should the user add more arguments, the system throws an exception, in stead of guessing what the user wants.
                     else
                     {
-                        throw new ArgumentException("Too many arguments");
+                        cli.DisplayArgumentException("Too many arguments!");
                     }
                 }
             }
+            // Some exception cleanup has happened, so it is not guaranteed that all exceptions will catch anything, but are left alone to be safe.
+
             // User defined exceptions
-            // Sending the exception to the CLI, as the userdefined exceptions can contain additional info that
-            // has to bee shown to the user.
             catch(UserDoesNotExistException ex)
             {
                 cli.DisplayUserNotFound(ex.Message, ex.Data["user"].ToString());
             }
             catch(ProductDoesNotExistException ex)
             {
-                cli.DisplayProductNotFound(ex.Message, uint.Parse(ex.Data["product"].ToString()));
+                cli.DisplayProductNotFound(uint.Parse(ex.Data["product"].ToString()));
             }
             catch(ProductNotActiveException ex)
             {
@@ -174,7 +171,7 @@ namespace OOP_Spring_2015
             // Build-In Exceptions
             catch (KeyNotFoundException)
             {
-                cli.DisplayAdminCommandNotFoundMessage(command); // <- this is the only place a dictionary should be able to get a valid key: AdminCommands.
+                cli.DisplayAdminCommandNotFoundMessage(command);
             }
             catch (ArgumentNullException ex)
             {
@@ -188,7 +185,6 @@ namespace OOP_Spring_2015
             {
                 cli.DisplayGeneralError(ex.Message);
             }
-            // No final, as the program returns to get new input here.
         }
 
         // Switch statement for man pages, deciding what message to show for the user.
@@ -218,11 +214,15 @@ namespace OOP_Spring_2015
                 case "adduser":
                     cli.AdminDisplayAddUser();
                     break;
+                case "setprice":
+                    cli.AdminDisplaySetPrice();
+                    break;
                 case "man":
                     cli.AdminDisplayMan();
                     break;
                 default:
-                    throw new ArgumentException("Unknown command");
+                    cli.DisplayArgumentException("Command not found: " + command);
+                    break;
             }
         }
 
@@ -233,7 +233,7 @@ namespace OOP_Spring_2015
             {
                 stringsystem.GetUser(username);
             }
-            catch (Exception)
+            catch (Exception)   // <- if an exception is thrown, it means that the username doesnøt exist.
             {
                 return username;
             }

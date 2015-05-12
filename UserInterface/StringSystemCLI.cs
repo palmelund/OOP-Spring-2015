@@ -70,9 +70,9 @@ namespace OOP_Spring_2015
             Console.WriteLine("{0}: {1}", errorMessage, username);
         }
 
-        public void DisplayProductNotFound(string errorMessage, uint productID)
+        public void DisplayProductNotFound(uint productID)
         {
-            Console.WriteLine("{0}: {1}", errorMessage, productID);
+            Console.WriteLine("The product is not found: {0}", productID);
         }
 
         public void DisplayProductNotActive(string errorMessage, uint productID, string product)
@@ -177,6 +177,7 @@ namespace OOP_Spring_2015
             Console.WriteLine("Null exception: " + errorString);
         }
 
+        // Only used on system startup. Should not 
         public void DisplayCriticalError(string criticalErrorMessage)
         {
             Console.WriteLine("Critical Error: {0}", criticalErrorMessage);
