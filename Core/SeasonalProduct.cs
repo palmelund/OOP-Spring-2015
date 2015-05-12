@@ -29,8 +29,26 @@ namespace OOP_Spring_2015
             Name = name;
             Price = price;
             Active = active;
-            SeasonStartDate = seasonStartDate;
-            SeasonEndDate = seasonEndDate;
+            SeasonStartDate = SetStartDate(seasonStartDate);
+            SeasonEndDate = SetEndDate(seasonEndDate);
+        }
+
+        DateTime SetStartDate(DateTime date)
+        {
+            if(date.Equals(null))
+            {
+                Active = true;
+            }
+            return date;
+        }
+
+        DateTime SetEndDate(DateTime date)
+        {
+            if(date.Equals(null))
+            {
+                Active = true;
+            }
+            return date;
         }
     }
 }
